@@ -14,7 +14,7 @@ To test run shotgun in the console
 
 ## Usage
 
-After running shotgun use the homepage at [localhost:9393](https://localhost:9393) to navigate through the webpage.
+After running shotgun use the homepage at [localhost:9393](http://localhost:9393) to navigate through the webpage.
 
 Sample video below: 
 
