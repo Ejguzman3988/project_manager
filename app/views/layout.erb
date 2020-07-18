@@ -12,10 +12,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <nav>
+    <a href="/">Home</a>
+  </nav>
+  <nav style="text-align:right;">
     <% if logged_in? %>
       <a href="/logout">Log Out</a>
     <% end %>
   </nav>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <div>
+        <%= error %>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <% if flash[:notices] %>
+    <% flash[:notices].each do |notice| %>
+      <div>
+        <%= notice %>
+      </div>
+    <% end %>
+  <% end %>
+  
   <body>
     <div class="wrapper">
 

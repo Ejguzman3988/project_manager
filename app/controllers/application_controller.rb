@@ -1,7 +1,8 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
-
+  use Rack::Flash
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -20,6 +21,10 @@ class ApplicationController < Sinatra::Base
 
     def logged_in?
       !!current_user
+    end
+
+    def find_user
+      @user = User.find_by_id(session[:user_id])
     end
   end
 end

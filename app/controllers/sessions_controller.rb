@@ -1,16 +1,25 @@
 class SessionsController < ApplicationController
-
+    use Rack::Flash
+    
     get '/signup' do 
-        erb :'/sessions/signup'
+        if logged_in?
+            redirect '/users'
+        else
+            erb :'/sessions/signup'
+        end
     end
 
     get '/login' do
-        erb :'/sessions/login'
+        if logged_in?
+            redirect "/users/#{current_user.id}"
+        else
+            erb :'/sessions/login'
+        end
     end
 
     get '/logout' do
         session.clear
-
+        flash[:notices] = ["Successfully logged out."]
         redirect '/'
     end
 
@@ -19,31 +28,28 @@ class SessionsController < ApplicationController
         user = User.new(params[:user])
 
         if user.save
-            if session[:failure_message]
-                session[:failure_message] = nil
-            end
             session[:user_id] = user.id
             redirect "/users/#{user.id}"
         else
-            # TODO: Change to flash
-            session[:failure_message] = "Enter valid sign up form."
-
+            if User.find_by_username(params[:user][:username]) && !params[:user][:password].blank? && !params[:user][:name].blank? 
+                flash[:errors] = ["Username is not unique."] 
+            else
+                flash[:errors] = user.errors.full_messages
+            end
+            
             redirect '/signup'
 
         end
     end
 
     post '/login' do
-        session[:failure_message] = nil
 
         user = User.find_by_username(params[:user][:username])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            redirect '/users'
+            redirect "/users/#{user.id}"
         else
-            # TODO: Change to flash
-            session[:failure_message] = "Enter valid login in form."
-
+            flash[:errors] = ["Invalid Username and Password."]
             redirect '/login'
         end
         

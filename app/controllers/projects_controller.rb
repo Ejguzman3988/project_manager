@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-    
+    use Rack::Flash
+
     get '/projects' do 
         erb :'projects/index'
     end
