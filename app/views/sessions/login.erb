@@ -1,1 +1,21 @@
-<h1>Login</h1>
+<!-- TODO: Change to Flash -->
+<% if session[:failure_message] %>
+    <%= session[:failure_message] %>
+<% end %>
+
+<h1>Log In</h1>
+
+<form action="/login" method="post">
+    <br>
+    <div>
+        User Name: <input type="text" name="user[username]" id="user_username">
+    </div>
+    <br>
+    <div>
+        Password: <input type="password" name="user[password]" id="user_password">
+    </div>
+    <br>
+    <input type="submit" value="Log In">
+    <br>
+</form>
+
