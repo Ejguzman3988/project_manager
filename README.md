@@ -4,7 +4,7 @@ Project Manager is an app where a user can sign up and create projects. These pr
 
 ## Installation
 
-Clone and fork this repo. 
+Fork and clone this repo. 
 
 And then execute:
 
@@ -23,8 +23,8 @@ TODO: POST SAMPLE VIDEO
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tarkov_pedia. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/tarkov_pedia/blob/master/CODE_OF_CONDUCT.md).
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/Ejguzman3988/project_manager. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Ejguzman3988/project_manager/blob/master/CODE_OF_CONDUCT.md).
+g
 
 ## License
 
@@ -32,4 +32,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the TarkovPedia project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/tarkov_pedia/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the TarkovPedia project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Ejguzman3988/project_manager/blob/master/CODE_OF_CONDUCT.md).
