@@ -9,14 +9,13 @@ class SessionsController < ApplicationController
     end
 
     post '/signup' do
-        if session[:failure_message]
-            session[:failure_message]
-            session[:failure_message] = nil
-        end
-
+        
         user = User.new(params[:user])
 
         if user.save
+            if session[:failure_message]
+                session[:failure_message] = nil
+            end
             redirect "/users/#{user.id}"
         else
             # Change to flash
