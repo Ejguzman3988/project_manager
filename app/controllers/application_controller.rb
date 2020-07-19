@@ -39,19 +39,16 @@ class ApplicationController < Sinatra::Base
     end
 
     def sanitize_params(params)
-      unless logged_in?
-        input = params
-        input.each do |k,v|
-          input[k].each do |k1,v1|
-            params[k][k1] = Rack::Utils.escape_html(v1)
-          end
-        end
-      else
+      if params[:user][:project]
         input = params[:user]
-        input.each do |k,v|
+      else
+        input = params
+      end
+
+      input.each do |k,v|
+        rescue input[k]
           input[k].each do |k1,v1|
-            params[:user][k][k1] = Rack::Utils.escape_html(v1)
-          end
+            input[k][k1] = Rack::Utils.escape_html(v1)
         end
       end
     end

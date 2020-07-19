@@ -29,25 +29,48 @@ class UsersController < ApplicationController
 
     get '/users/:id/edit' do 
         # TODO: Change name and password and delete.
-        if logged_in? && find_user.id == User.find(params[:id])
+        @user = current_user
+        profile_user = User.find(params[:id])
+        if logged_in? && @user == profile_user
             erb :'/users/edit'
         else
-            flash[:error] = ["Can't edit another users profile"]
+            flash[:errors] = ["Can't edit another users profile"]
 
-            redirect "/users/#{params[:id]"
+            redirect "/users/#{params[:id]}"
         end
         
     end
 
+    get '/users/:id/delete' do
+        @user = current_user
+        if @user == User.find(params[:id])
+            erb :'/users/delete'
+        else
+            flash[:notice] = ["You CANNOT Delete an account that isn't yours."]
+            redirect "/users/#{@user.id}"
+        end
+    end
+
     patch '/users/:id' do
-        # TODO: Make changes to name and password.
-        redirect "/users/#{user.id}"
+        sanitize_params(params)
+        user = current_user
+        if user.authenticate(params[:user][:old_password]) && user.update(name: params[:user][:name], username: params[:user][:username], password: params[:user][:new_password] )
+            redirect "/users/#{params[:id]}"
+        else
+            redirect "/users/#{params[:id]}/edit"
+        end
+        
     end
 
     delete '/users/:id' do
         # TODO: Destroy user.
-        user.destroy
-        session.clear
-        redirect "/"
+        if current_user.id == params[:id]
+            current_user.destroy
+            session.clear
+            flash[:notices] = ["Successfully deleted Account."]
+            redirect "/"
+        else
+            flash[:errors] = ["You cannot delete someone elses account"]
+        end
     end
 end

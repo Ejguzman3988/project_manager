@@ -1,0 +1,28 @@
+<h1>Change User Settings</h1>
+
+<form action="/users/<%=@user.id%>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <br>
+    <div>
+        Name: <input type="text" name="user[name]" id="user_name" value="<%=@user.name%>">
+    </div>
+    <br>
+    <div>
+        User Name: <input type="text" name="user[username]" id="user_username" value="<%=@user.username%>">
+    </div>
+    <br>
+    <div>
+        Confirm Password: <input type="password" name="user[old_password]" id="user_password">
+    </div>
+    <br>
+    <div>
+        New Password: <input type="password" name="user[new_password]" id="user_password">
+    </div>
+    <br>
+    <input type="submit" value="Update">
+    <br>
+    <div style="text-align:right">
+        <a href="/users/<%=@user.id%>">Delete Account</a>
+    </div>
+</form>
+

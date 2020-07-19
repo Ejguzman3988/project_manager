@@ -1,6 +1,10 @@
 <h1>Welcome, <%= @user.name %>.</h1>
 <nav>
     <a href="/projects/new">Create New Project</a>
+    <br>
+    <% if current_user == @user %>
+        <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
+    <% end %>
 </nav>
 <ul>
     <% @projects.each do |project| %>
