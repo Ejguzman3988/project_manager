@@ -10,7 +10,13 @@ class ProjectsController < ApplicationController
     end
 
     get '/projects/:id' do 
-        erb :'projects/show'
+        if logged_in?
+            find_project(params[:id])
+            erb :'projects/show'
+        else
+            redirect '/login'
+        end
+        
     end
 
     get '/projects/:id/edit' do

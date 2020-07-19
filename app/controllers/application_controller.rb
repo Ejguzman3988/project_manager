@@ -26,5 +26,9 @@ class ApplicationController < Sinatra::Base
     def find_user
       @user = User.find_by_id(session[:user_id])
     end
+
+    def find_project(id)
+      @project = Project.find_by_id(id)
+    end
   end
 end

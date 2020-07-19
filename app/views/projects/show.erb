@@ -1,0 +1,16 @@
+<h1 style="text-align:center"><%= @project.name %></h1>
+<a href="/prjects/<%=@project.id%>/edit">edit</a>
+<a href="/prjects/<%=@project.id%>/delete">delete</a>
+<br>
+<h2 style="text-align:center">Description:</h2 style="text-align:center">
+<div>
+    <p style="text-align:center">
+        <%= @project.description %>
+    </p>
+</div>
+
+<h2 style="text-align:center">Image:</h2 style="text-align:center">
+<div style="text-align: center">
+    <img src="<%=@project.img_link%>" align="center" width="400" height="300" >
+</div>
+

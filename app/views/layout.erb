@@ -12,7 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <nav>
-    <a href="/">Home</a>
+    <% if logged_in? %>
+      <a href="/users/<%=current_user.id%>">Home</a>
+    <% else %>
+      <a href="/">Home</a>
+    <% end %>
   </nav>
   <nav style="text-align:right;">
     <% if logged_in? %>
