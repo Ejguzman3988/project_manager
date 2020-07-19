@@ -1,0 +1,25 @@
+<h1>Create Project</h1>
+<form action="/projects" method="post">
+    <div>
+        <h3>Project Name:</h3> 
+        <br>
+        <textarea name="user[project][name]" id="project_name" cols="30" rows="1"></textarea>
+    </div>
+    
+    <div>
+        <h3> Project description: </h3>
+        <br>
+        <textarea name="user[project][description]" id="project_description" cols="50" rows="10" > </textarea>
+
+    </div>
+
+    <div>
+        <h3>Project Image Link:</h3>
+        <br>
+        <textarea name="user[project][img_link]" id="project_image_link" cols="50" rows="5"></textarea>
+    </div>
+
+    <br>
+    <input type="submit" value="Create Project">
+</form>
+   

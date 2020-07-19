@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
     end
 
     get '/projects/new' do 
+        
+
         erb :'projects/new'
     end
 
@@ -24,9 +26,14 @@ class ProjectsController < ApplicationController
         erb :'projects/edit'
     end
 
-    post '/projects/:id' do 
+    post '/projects' do 
         #TODO: Add helper method to find current project
-        erb :'projects/show'
+        find_user
+        sanitize_params(params)
+        @project = @user.projects.build(params[:user][:project])
+        @project.save
+        flash[:notices] = ["successfully created project"]
+        redirect "/projects/#{@project.id}"
     end
 
     patch '/projects/:id' do 
