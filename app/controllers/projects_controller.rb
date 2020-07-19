@@ -2,13 +2,25 @@ class ProjectsController < ApplicationController
     use Rack::Flash
 
     get '/projects' do 
-        erb :'projects/index'
+        if logged_in?
+            @projects = Project.all
+            erb :'projects/index'
+        else
+            flash[:errors] = ["Please log in to view projects"]
+            redirect '/login'
+        end
     end
 
     get '/projects/new' do 
+        if logged_in?
+            erb :'projects/new'
+        else
+            flash[:errors] = ["Must be logged in to create new project"]
+            redirect '/login'
+        end
         
 
-        erb :'projects/new'
+        
     end
 
     get '/projects/:id' do 
@@ -31,9 +43,13 @@ class ProjectsController < ApplicationController
         find_user
         sanitize_params(params)
         @project = @user.projects.build(params[:user][:project])
-        @project.save
-        flash[:notices] = ["successfully created project"]
-        redirect "/projects/#{@project.id}"
+        if @project.save
+            flash[:notices] = ["successfully created project"]
+            redirect "/projects/#{@project.id}"
+        else
+            flash[:errors] = @project.errors.full_messages
+            redirect "/projects/new"
+        end
     end
 
     patch '/projects/:id' do 

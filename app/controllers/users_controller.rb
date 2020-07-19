@@ -11,15 +11,32 @@ class UsersController < ApplicationController
         end
     end
 
+        
+    get '/users/new' do
+        redirect '/signup'
+    end
+
     get '/users/:id' do 
         # TODO: view your profile. 
-        @projects = find_user.projects
-        erb :'/users/index'
+        if logged_in?
+            @user = User.find(params[:id])
+            @projects = @user.projects
+            erb :'/users/index'
+        else
+            redirect "/login"
+        end
     end
 
     get '/users/:id/edit' do 
         # TODO: Change name and password and delete.
-        erb :'/users/edit'
+        if logged_in? && find_user.id == User.find(params[:id])
+            erb :'/users/edit'
+        else
+            flash[:error] = ["Can't edit another users profile"]
+
+            redirect "/users/#{params[:id]"
+        end
+        
     end
 
     patch '/users/:id' do

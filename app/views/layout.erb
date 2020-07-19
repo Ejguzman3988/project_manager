@@ -15,14 +15,15 @@
   <nav>
     <% if logged_in? %>
       <a href="/users/<%=current_user.id%>">Home</a>
+      <a href="/logout" style="float: right;">Log Out</a>
+      <br>
+      <a href="/projects">All Projects</a>
     <% else %>
       <a href="/">Home</a>
     <% end %>
   </nav>
   <nav style="text-align:right;">
-    <% if logged_in? %>
-      <a href="/logout">Log Out</a>
-    <% end %>
+    
   </nav>
   <% if flash[:errors] %>
     <% flash[:errors].each do |error| %>
