@@ -1,0 +1,7 @@
+<h1><%= @user.name %></h1>
+<h1>ARE YOU SURE YOU WANT TO DELETE YOUR ACCOUNT?</h1>
+<form action="/users/<%=@user.id%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Yes">
+    <button><a href="/users">No</a></button>
+</form>
