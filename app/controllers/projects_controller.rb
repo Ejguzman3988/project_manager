@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
     end
 
     get '/projects/:id/edit' do
+        find_project(params[:id])
         erb :'projects/edit'
     end
 
@@ -30,7 +31,18 @@ class ProjectsController < ApplicationController
 
     patch '/projects/:id' do 
         #TODO: Find project -> Update Project -> Flash: Completed
-        
+        sanitize_params(params)
+        project = find_project(params[:id])
+        project.update(name: params[:user][:project][:name], description: params[:user][:project][:description],  img_link: params[:user][:project][:img_link])
+
         redirect "/projects/#{project.id}"
+    end
+
+    delete '/projects/:id' do
+        project = find_project(params[:id])
+        project.destroy
+
+        flash[:notices] = ["You Have successfully deleted project."]
+        redirect "/users/#{current_user.id} "
     end
 end

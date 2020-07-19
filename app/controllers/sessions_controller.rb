@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
     end
 
     post '/signup' do
-        
+        sanitize_params(params)
         user = User.new(params[:user])
 
         if user.save

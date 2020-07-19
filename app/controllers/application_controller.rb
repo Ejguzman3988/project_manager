@@ -30,5 +30,30 @@ class ApplicationController < Sinatra::Base
     def find_project(id)
       @project = Project.find_by_id(id)
     end
+
+    def sanitize_project_params(params)
+      user_input = params[:user][:project]
+      user_input.each do |k,v|
+          params[:user][:project][k] = Rack::Utils.escape_html(v)
+      end
+    end
+
+    def sanitize_params(params)
+      unless logged_in?
+        input = params
+        input.each do |k,v|
+          input[k].each do |k1,v1|
+            params[k][k1] = Rack::Utils.escape_html(v1)
+          end
+        end
+      else
+        input = params[:user]
+        input.each do |k,v|
+          input[k].each do |k1,v1|
+            params[:user][k][k1] = Rack::Utils.escape_html(v1)
+          end
+        end
+      end
+    end
   end
 end

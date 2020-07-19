@@ -1,0 +1,26 @@
+<h1>Edit Project</h1>
+<form action="/projects/<%=@project.id%>" method="post">
+     <input type="hidden" name="_method" value="patch">
+    <div>
+        <h3>Project Name:</h3> 
+        <br>
+        <textarea name="user[project][name]" id="project_name" cols="30" rows="1"><%=@project.name%></textarea>
+    </div>
+    
+    <div>
+        <h3> Project description: </h3>
+        <br>
+        <textarea name="user[project][description]" id="project_description" cols="50" rows="10" > <%=@project.description%> </textarea>
+
+    </div>
+
+    <div>
+        <h3>Project Image Link:</h3>
+        <br>
+        <textarea name="user[project][img_link]" id="project_image_link" cols="50" rows="5"> <%=@project.img_link%></textarea>
+    </div>
+
+    <br>
+    <input type="submit" value="Edit Project">
+</form>
+   
