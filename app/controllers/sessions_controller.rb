@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
     use Rack::Flash
     
+    # Provides form for user to sign up
     get '/signup' do 
         if logged_in?
             redirect '/users'
@@ -9,6 +10,7 @@ class SessionsController < ApplicationController
         end
     end
 
+    # Provides form for user to log in
     get '/login' do
         if logged_in?
             redirect "/users/#{current_user.id}"
@@ -17,12 +19,16 @@ class SessionsController < ApplicationController
         end
     end
 
+    # Allows user to log out
     get '/logout' do
         session.clear
-        flash[:notices] = ["Successfully logged out."]
+        if logged_in?
+            flash[:notices] = ["Successfully logged out."] 
+        end
         redirect '/'
     end
 
+    # Adds a valid user into the db
     post '/signup' do
         sanitize_params(params)
         user = User.new(params[:user])
@@ -42,6 +48,7 @@ class SessionsController < ApplicationController
         end
     end
 
+    # Logs in a user with the correct credentials
     post '/login' do
         sanitize_params(params)
         user = User.find_by_username(params[:user][:username])
@@ -52,6 +59,5 @@ class SessionsController < ApplicationController
             flash[:errors] = ["Invalid Username and Password."]
             redirect '/login'
         end
-        
     end
 end

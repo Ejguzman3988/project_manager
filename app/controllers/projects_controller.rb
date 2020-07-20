@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
     use Rack::Flash
 
+    # Displays all the projects in the database
     get '/projects' do 
         if logged_in?
             @projects = Project.all
@@ -11,6 +12,7 @@ class ProjectsController < ApplicationController
         end
     end
 
+    # Provides a form to create a new project
     get '/projects/new' do 
         if logged_in?
             erb :'projects/new'
@@ -20,6 +22,7 @@ class ProjectsController < ApplicationController
         end
     end
 
+    # Views a project
     get '/projects/:id' do 
         if logged_in?
             find_project(params[:id])
@@ -30,6 +33,7 @@ class ProjectsController < ApplicationController
         end
     end
 
+    # Provides a form to edit a project
     get '/projects/:id/edit' do
         if logged_in? && current_user.projects.find(params[:id])
             find_project(params[:id])
@@ -40,6 +44,7 @@ class ProjectsController < ApplicationController
         end  
     end
 
+    # Adds a valid project to db
     post '/projects' do 
         find_user
         sanitize_params(params)
@@ -53,8 +58,8 @@ class ProjectsController < ApplicationController
         end
     end
 
+    # Updates a valid change to a project
     patch '/projects/:id' do 
-        #TODO: Find project -> Update Project -> Flash: Completed
         sanitize_params(params)
         project = find_project(params[:id])
         new_project = project.update(
@@ -72,6 +77,7 @@ class ProjectsController < ApplicationController
         end
     end
 
+    # Deletes a project
     delete '/projects/:id' do
         project = find_project(params[:id])
         project.destroy

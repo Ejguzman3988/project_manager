@@ -1,32 +1,36 @@
 class UsersController < ApplicationController
     use Rack::Flash
 
+    # TODO: Change to show generic user profile?/ create a new index page
+    # Shows all of users projects
     get '/users' do
         if logged_in?
             find_user
             @projects = @user.projects
-            erb :'/users/index'
+            erb :'/users/show' 
         else
             redirect '/login'
         end
     end
 
-        
+    # Redirects to a sign up form
     get '/users/new' do
         redirect '/signup'
     end
 
+    # Shows all of specified users projects
     get '/users/:id' do 
         # TODO: view your profile. 
         if logged_in?
             @user = User.find(params[:id])
             @projects = @user.projects
-            erb :'/users/index'
+            erb :'/users/show'
         else
             redirect "/login"
         end
     end
 
+    # Form to edit currently logged on user
     get '/users/:id/edit' do 
         # TODO: Change name and password and delete.
         @user = current_user
@@ -41,16 +45,7 @@ class UsersController < ApplicationController
         
     end
 
-    get '/users/:id/delete' do
-        @user = current_user
-        if @user == User.find(params[:id])
-            erb :'/users/delete'
-        else
-            flash[:notice] = ["You CANNOT Delete an account that isn't yours."]
-            redirect "/users/#{@user.id}"
-        end
-    end
-
+    # Updates the user by given specifications
     patch '/users/:id' do
         sanitize_params(params)
         user = current_user
@@ -62,13 +57,14 @@ class UsersController < ApplicationController
         
     end
 
+    # deletes a user and its projects
     delete '/users/:id' do
-        # TODO: Destroy user.
-        if current_user.id == params[:id].to_i
-            current_user.projects.each do |project|
+        user = current_user
+        if user.id == params[:id].to_i
+            user.projects.each do |project|
                 project.delete
             end
-            current_user.delete
+            user.delete
             session.clear
             flash[:notices] = ["Successfully deleted Account."]
             redirect "/"
