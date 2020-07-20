@@ -12,13 +12,14 @@
 <div style="text-align: center">
     <img src=<%=@project.img_link%> align="center" width="400" height="300" >
 </div>
-<div>
-    <form action="/projects/<%=@project.id%>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <a href="/projects/<%=@project.id%>/edit"><button type="button">Edit Project</button></a>
-        <input type="submit" value="Delete Project" style="float: right;">
-    </form>
-</div>
-
+<% if @project.user == current_user %>
+    <div>
+        <form action="/projects/<%=@project.id%>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <a href="/projects/<%=@project.id%>/edit"><button type="button">Edit Project</button></a>
+            <input type="submit" value="Delete Project" style="float: right;">
+        </form>
+    </div>
+<% end %>
 
 
