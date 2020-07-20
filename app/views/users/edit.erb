@@ -1,5 +1,8 @@
 <h1>Change User Settings</h1>
-
+<form action="/users/<%=@user.id%>" method="post" style="text-align:right">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Account">
+</form>
 <form action="/users/<%=@user.id%>" method="post">
     <input type="hidden" name="_method" value="patch">
     <br>
@@ -20,9 +23,5 @@
     </div>
     <br>
     <input type="submit" value="Update">
-    <br>
-    <div style="text-align:right">
-        <a href="/users/<%=@user.id%>/delete">Delete Account</a>
-    </div>
 </form>
 

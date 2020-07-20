@@ -18,9 +18,6 @@ class ProjectsController < ApplicationController
             flash[:errors] = ["Must be logged in to create new project"]
             redirect '/login'
         end
-        
-
-        
     end
 
     get '/projects/:id' do 
@@ -28,18 +25,22 @@ class ProjectsController < ApplicationController
             find_project(params[:id])
             erb :'projects/show'
         else
+            flash[:errors] = ["Must be logged in to view project."]
             redirect '/login'
         end
-        
     end
 
     get '/projects/:id/edit' do
-        find_project(params[:id])
-        erb :'projects/edit'
+        if logged_in? && current_user.projects.find(params[:id])
+            find_project(params[:id])
+            erb :'projects/edit'
+        else
+            flash[:errors] = ["You don't have access to edit this project."]
+            redirect '/login'
+        end  
     end
 
     post '/projects' do 
-        #TODO: Add helper method to find current project
         find_user
         sanitize_params(params)
         @project = @user.projects.build(params[:user][:project])
@@ -56,9 +57,19 @@ class ProjectsController < ApplicationController
         #TODO: Find project -> Update Project -> Flash: Completed
         sanitize_params(params)
         project = find_project(params[:id])
-        project.update(name: params[:user][:project][:name], description: params[:user][:project][:description],  img_link: params[:user][:project][:img_link])
-
-        redirect "/projects/#{project.id}"
+        new_project = project.update(
+            name: params[:user][:project][:name],
+            description: params[:user][:project][:description],  
+            img_link: params[:user][:project][:img_link]
+        )
+        
+        if new_project
+            flash[:notices] = ["You have updated your project."]
+            redirect "/projects/#{project.id}"
+        else
+            flash[:errors] = ["Project name can't be blank and must be unique. "]
+            redirect "/projects/#{project.id}/edit"
+        end
     end
 
     delete '/projects/:id' do
@@ -66,6 +77,6 @@ class ProjectsController < ApplicationController
         project.destroy
 
         flash[:notices] = ["You Have successfully deleted project."]
-        redirect "/users/#{current_user.id} "
+        redirect "/users/#{current_user.id}"
     end
 end

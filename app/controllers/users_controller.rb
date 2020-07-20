@@ -65,7 +65,10 @@ class UsersController < ApplicationController
     delete '/users/:id' do
         # TODO: Destroy user.
         if current_user.id == params[:id].to_i
-            current_user.destroy
+            current_user.projects.each do |project|
+                project.delete
+            end
+            current_user.delete
             session.clear
             flash[:notices] = ["Successfully deleted Account."]
             redirect "/"

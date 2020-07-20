@@ -5,10 +5,10 @@
 - [x] Create Idea
 ### Fri:
 - [x] Get Basic Functionality Working
-- [ ] Set up views for User and Projects
+- [x] Set up views for User and Projects
 ### Sat:
 - [ ] Implement todos
-- [ ] Make sure secure, and people can't edit other works that don't belong to them
+- [X] Make sure secure, and people can't edit other works that don't belong to them
 ### Sun:
 - [ ] Finish anything missing
 
