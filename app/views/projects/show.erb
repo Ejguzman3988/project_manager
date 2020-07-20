@@ -1,17 +1,16 @@
-<h1 style="text-align:center"><%= @project.name %></h1>
-<p style="text-align:center">created by, <%= @project.user.name.capitalize %></p>
-<br>
-<h2 style="text-align:center">Description:</h2 style="text-align:center">
 <div>
-    <p style="text-align:center">
-        <%= @project.description %>
-    </p>
+    <img class="materialboxed right" style="margin-right:-30px; margin-left:30px; margin-top:-40px" width="400px" height="300px" src="<%=@project.img_link%>">
+    <h1 display="inline-block" width="46%"><%= @project.name %></h1>
+    <h4>created by, <%= @project.user.name.capitalize %></h4>
+    <br>
+    <div>
+        <p style="text-align:center">
+            <%= @project.description %>
+        </p>
+    </div>
 </div>
-
-<h2 style="text-align:center">Image:</h2 style="text-align:center">
-<div style="text-align: center">
-    <img src=<%=@project.img_link%> align="center" width="400" height="300" >
-</div>
+<br>
+<div>
 <% if @project.user == current_user %>
     <div>
         <form action="/projects/<%=@project.id%>" method="post">
@@ -21,5 +20,7 @@
         </form>
     </div>
 <% end %>
+</div>
+
 
 
