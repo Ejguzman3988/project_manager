@@ -6,12 +6,12 @@ development:
   host: localhost
   user: ejguzman3988
   password: Leomegdav2
-  
+
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: localhost
+  host: <%= ENV['DATABASE_HOST'] %>
   user: ejguzman3988
   password: Leomegdav2
   database: production
