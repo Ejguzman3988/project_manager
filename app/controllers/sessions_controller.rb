@@ -21,10 +21,10 @@ class SessionsController < ApplicationController
 
     # Allows user to log out
     get '/logout' do
-        session.clear
         if logged_in?
             flash[:notices] = ["Successfully logged out."] 
         end
+        session.clear
         redirect '/'
     end
 

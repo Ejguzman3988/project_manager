@@ -61,31 +61,41 @@
   <!-- End Navigation -->
 
 
-  <!-- Errors -->
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |error| %>
-      <div>
-        <%= error %>
-      </div>
-    <% end %>
-  <% end %>
-  <!-- End Errors -->
+  <div class="container">
+      <!-- Errors -->
+      <% if flash[:errors] %>
+        <blockquote class="red lighten-3 white-text">
+          <b>
+            <% flash[:errors].each do |error| %>
+            <div>
+              <%= error %>
+            </div>
+          <% end %>
+          </b>
+        </blockquote>
+      <% end %>
+      <!-- End Errors -->
 
-  <!-- Notices -->
-  <% if flash[:notices] %>
-    <% flash[:notices].each do |notice| %>
-      <div>
-        <%= notice %>
-      </div>
-    <% end %>
-  <% end %>
-  <!-- End Notices -->
+      <!-- Notices -->
+      <% if flash[:notices] %>
+        <blockquote class="green lighten-3 white-text">
+          <b>
+            <% flash[:notices].each do |notice| %>
+            <div>
+              <%= notice %>
+            </div>
+            <% end %>
+          </b>
+        </blockquote>
+      <% end %>
+      <!-- End Notices -->  
+  </div>
   <body class="grey lighten-2">
     <!--Main Content -->
     <div class="container white lighten-4 z-depth-3" style="margin-top: 25px; margin-bottom: 25px; padding: 25px">
       <%= yield %>
     </div>
-    
+  </div> 
     <!-- End Main Content -->
     
     <!-- Footer -->

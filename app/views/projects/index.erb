@@ -1,9 +1,27 @@
 <h1>List of All Projects.</h1>
-<nav>
-    <a href="/projects/new">Create New Project</a>
-</nav>
-<ul>
+<a href="/projects/new" class="right grey darken-4 waves-effect waves-light btn-small"><i class="material-icons left" style="margin-right:2px; margin-left:-8px">create_new_folder</i>Create New Project</a>
+<br>
+<br>
+<div class="row">
     <% @projects.each do |project| %>
-        <li><a href="/projects/<%=project.id%>"><%= project.name %></a> created by <a href="/users/<%=project.user.id%>"><%= project.user.name %></a></li>
+        <% img_link = project.img_link %>
+        <% if img_link == "0" || img_link == "1" || img_link.nil? %>
+            <% img_link = "https://cdn01.alison-static.net/public/html/site/img/email/pm-hub-header-img.png" %>
+        <% end %>
+        <div class="col s12 m6 l3">
+            <div class="card small">
+                <div class="brown lighten-2 card-image waves-effect waves-block waves-light">
+                <img class="activator" src="<%=img_link%>">
+                </div>
+                <div class="blue-grey darken-4  card-content">
+                <span class="card-title activator white-text"><%= project.name %><i class="material-icons right">more_vert</i></span>
+                <p><a href="/projects/<%=project.id%>">Go to project</a></p>
+                <p class="white-text">Created by, <a href="/users/<%=project.user.id%>"><%= project.user.name %></a></p>
+                </div>
+                <div class="blue-grey darken-4 card-reveal">
+                <span class="white-text card-title"><%= project.name %><i class="material-icons right">close</i></span>
+                <p class="white-text"><%= project.description %></p>
+                </div>
+            </div>        
+        </div>
     <% end %>
-</ul>
