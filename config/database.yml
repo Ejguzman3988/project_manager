@@ -3,9 +3,16 @@ development:
   encoding: unicode
   database: development
   pool: 2
+  host: localhost
+  user: ejguzman3988
+  password: Leomegdav2
+  
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: <%= ENV['DATABASE_HOST'] %>
+  host: localhost
+  user: ejguzman3988
+  password: Leomegdav2
   database: production
+  
