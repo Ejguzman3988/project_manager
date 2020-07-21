@@ -1,3 +1,7 @@
+user.create(name: "Robo" username: "test" password: "testtest")
+
+user.create(name: "Robo2" username: "test2" password: "testtest")
+
 (1..20).to_a.each do |num|
     Project.create(name: "Project. #{num}")
 end
