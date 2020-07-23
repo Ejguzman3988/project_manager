@@ -9,7 +9,7 @@
         <input type="hidden" name="_method" value="patch">
         <div class="row">
             <div class="input-field col s12">
-                <textarea name="user[project][name]" id="project_name" class="materialize-textarea"><%=@project.name%></textarea>
+                <textarea name="user[project][name]" id="project_name" class="materialize-textarea" data-length="20"><%=@project.name%></textarea>
                 <label  class="active" for="project_name" style="font-size:22px">Project Name</label>
             </div>
         </div>
