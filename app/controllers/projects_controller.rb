@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+    DEFAULT_IMG = "https://cdn01.alison-static.net/public/html/site/img/email/pm-hub-header-img.png"
+    
     use Rack::Flash
 
     # Displays all the projects in the database
@@ -49,6 +51,11 @@ class ProjectsController < ApplicationController
         find_user
         sanitize_params(params)
         @project = @user.projects.build(params[:user][:project])
+
+        if @project.img_link.nil?
+            @project.img_link = DEFAULT_IMG
+        end
+
         if @project.save
             flash[:notices] = ["successfully created project"]
             redirect "/projects/#{@project.id}"
