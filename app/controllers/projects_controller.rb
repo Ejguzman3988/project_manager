@@ -50,11 +50,10 @@ class ProjectsController < ApplicationController
     post '/projects' do 
         find_user
         sanitize_params(params)
-        @project = @user.projects.build(params[:user][:project])
-
-        if @project.img_link.nil?
-            @project.img_link = DEFAULT_IMG
+        if params[:user][:project][:img_link].blank?
+            params[:user][:project][:img_link] = DEFAULT_IMG
         end
+        @project = @user.projects.build(params[:user][:project])
 
         if @project.save
             flash[:notices] = ["successfully created project"]
@@ -69,6 +68,9 @@ class ProjectsController < ApplicationController
     patch '/projects/:id' do 
         sanitize_params(params)
         project = find_project(params[:id])
+        if params[:user][:project][:img_link].blank?
+            params[:user][:project][:img_link] = DEFAULT_IMG
+        end
         new_project = project.update(
             name: params[:user][:project][:name],
             description: params[:user][:project][:description],  

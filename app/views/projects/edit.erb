@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <textarea name="user[project][img_link]" id="project_image_link" class="materialize-textarea"> <%=@project.img_link%></textarea>
+                <textarea name="user[project][img_link]" id="project_image_link" class="materialize-textarea"> <%=@project.img_link if @project.img_link != DEFAULT_IMG%></textarea>
                 <label class="active" for="project_image_link" style="font-size:22px">Image Url</label>
             </div>
         </div>
