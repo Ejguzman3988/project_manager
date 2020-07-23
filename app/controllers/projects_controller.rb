@@ -71,17 +71,19 @@ class ProjectsController < ApplicationController
         if params[:user][:project][:img_link].blank?
             params[:user][:project][:img_link] = DEFAULT_IMG
         end
+
+
         new_project = project.update(
             name: params[:user][:project][:name],
             description: params[:user][:project][:description],  
             img_link: params[:user][:project][:img_link]
         )
-        
+
         if new_project
             flash[:notices] = ["You have updated your project."]
             redirect "/projects/#{project.id}"
         else
-            flash[:errors] = ["Project name can't be blank and must be unique. "]
+            flash[:errors] = project.errors.full_messages
             redirect "/projects/#{project.id}/edit"
         end
     end
