@@ -54,5 +54,16 @@ class ApplicationController < Sinatra::Base
       end
       input
     end
+
+    def limit_words(string, num)
+      unless string.nil?
+        limited_string = string.split("", num)
+        limited_string.pop
+        limited_string << "..."
+        limited_string.join("")
+      else
+        "--- No Description ---"
+      end
+    end
   end
 end
