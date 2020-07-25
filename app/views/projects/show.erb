@@ -1,7 +1,14 @@
 <div>
     <img class="materialboxed right" style="margin-right:-30px; margin-left:30px; margin-top:-40px" width="400px" height="300px" src="<%=@project.img_link%>">
     <h1><%= @project.name %></h1>
-    <h4>created by, <%= @user.name.capitalize %></h4>
+    <h4>Owned by, <%= @user.name.capitalize %></h4>
+    <% if @project.users.include?(current_user) %>
+        <strong>
+            <h5 class="green-text text-color grey lighten-4">
+                You are part of this project.
+            </h5>
+        </strong>
+    <% end %>
     <br>
     <div>
         <p style="text-align:center">
