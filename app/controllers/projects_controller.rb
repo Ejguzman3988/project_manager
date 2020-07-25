@@ -55,6 +55,8 @@ class ProjectsController < ApplicationController
         end
         @project = @user.projects.build(params[:user][:project])
 
+        
+
         if @project.save
             flash[:notices] = ["successfully created project"]
             redirect "/projects/#{@project.id}"

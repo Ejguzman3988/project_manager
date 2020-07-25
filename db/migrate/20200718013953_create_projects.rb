@@ -4,7 +4,6 @@ class CreateProjects < ActiveRecord::Migration[4.2]
       t.string :name
       t.string :description
       t.string :img_link
-      t.integer :user_id
 
       t.timestamps null: false
     end
