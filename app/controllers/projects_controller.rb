@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
         if logged_in?
             find_project(params[:id])
             @user = User.find(@project.user_id)
+            @notifications = Notification.all.find_all{|note| note.project_id == params[:id].to_i && note.user_id == nil}
             erb :'projects/show'
         else
             flash[:errors] = ["Must be logged in to view project."]
@@ -45,6 +46,20 @@ class ProjectsController < ApplicationController
             flash[:errors] = ["You don't have access to edit this project."]
             redirect '/login'
         end  
+    end
+
+    post '/projects/:id/join' do
+        if logged_in? && !find_project(params[:id]).users.include?(current_user)
+            unless find_notification
+                Notification.create(project_id: params[:id], join_request: "#{current_user.id}")
+                flash[:notices] = ["Requested to join project."]
+                redirect "/users"
+            else
+                flash[:notices] = ["You have already requested to join."]
+            end
+        else
+            redirect '/login'
+        end
     end
 
     # Adds a valid project to db
@@ -95,6 +110,7 @@ class ProjectsController < ApplicationController
     # Deletes a project
     delete '/projects/:id' do
         project = find_project(params[:id])
+        Notifications.all.each{|note| note.delete if note.project_id == params[:id]}
         project.destroy
 
         flash[:notices] = ["You Have successfully deleted project."]

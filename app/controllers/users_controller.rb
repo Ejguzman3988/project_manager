@@ -24,6 +24,9 @@ class UsersController < ApplicationController
         if logged_in?
             @user = User.find(params[:id])
             @projects = @user.projects
+            @notifications = Notification.all.find_all do |note|
+                find_project(note.project_id).user_id == @user.id && note.user_id.nil?
+            end
             erb :'/users/show'
         else
             redirect "/login"

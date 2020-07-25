@@ -65,5 +65,9 @@ class ApplicationController < Sinatra::Base
         "--- No Description ---"
       end
     end
+
+    def find_notification
+      Notification.find_by(join_request: "#{current_user.id}")
+    end
   end
 end

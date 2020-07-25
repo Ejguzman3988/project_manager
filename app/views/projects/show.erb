@@ -8,6 +8,36 @@
                 You are part of this project.
             </h5>
         </strong>
+        <br>
+        <div>
+            <form action="/projects/<%=@project.id%>" method="post">
+                <a href="/projects/<%=@project.id%>/edit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">build</i>Edit Project</a>
+                <input type="hidden" name="_method" value="delete">
+                <% if current_user == @user %>
+                    <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button>
+
+                    <div>
+                        <% @notifications.each do |note| %>
+                            <% requester = User.find(note.join_request.to_i) %>
+                            <h5 class="text-color yellow lighten-3" id="notification">
+                                <a href="/users/<%=requester.id%>"><%= requester.username %></a> wants to join this project.
+                                <div id="question">
+                                    <button type="button" onclick="accept(<%=note.join_request%>)
+                                    ">Accept</button>
+
+                                    <button type="button" onclick="decline()
+                                    ">Decline</button>
+                                </div>
+                            </h5>
+                        <% end %>
+                    </div>
+                <% end %>
+            </form>
+        </div>
+    <% else %>
+        <form action="/projects/<%=@project.id%>/join" method="post">
+            <input type="submit" value="Join Request">
+        </form>
     <% end %>
     <br>
     <div>
@@ -16,20 +46,23 @@
         </p>
     </div>
 </div>
-<br>
-<div>
-<% if @project.users.include?(current_user)%>
-    <div>
-        <form action="/projects/<%=@project.id%>" method="post">
-            <a href="/projects/<%=@project.id%>/edit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">build</i>Edit Project</a>
-            <input type="hidden" name="_method" value="delete">
-            <% if current_user == @user %>
-                <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button> 
-            <% end %>
-        </form>
-    </div>
-<% end %>
-</div>
 
+<script>
+function accept(note) {
+  document.getElementById("question").remove()
+  var x = document.createElement("h6")
+  x.innerHTML = "Accepted \<%={number}%>".interpolate({ number: note})
+  document.getElementById("notification").appendChild(x)
+  
+  
 
+};
 
+function decline() {
+  document.getElementById("question").remove()
+  var x = document.createElement("h6")
+  x.innerHTML = "Declined"
+  document.getElementById("notification").appendChild(x)
+  
+};
+</script>
