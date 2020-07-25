@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
         if logged_in?
             @projects = Project.all
             erb :'projects/index'
+            
         else
             flash[:errors] = ["Please log in to view projects"]
             redirect '/login'
