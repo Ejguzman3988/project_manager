@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
     get '/projects/:id' do 
         if logged_in?
             find_project(params[:id])
+            @user = User.find(@project.user_id)
             erb :'projects/show'
         else
             flash[:errors] = ["Must be logged in to view project."]
@@ -53,11 +54,12 @@ class ProjectsController < ApplicationController
         if params[:user][:project][:img_link].blank?
             params[:user][:project][:img_link] = DEFAULT_IMG
         end
+        params[:user][:project][:user_id] = @user.id
         @project = @user.projects.build(params[:user][:project])
 
         
 
-        if @project.save
+        if @user.save
             flash[:notices] = ["successfully created project"]
             redirect "/projects/#{@project.id}"
         else
