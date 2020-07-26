@@ -66,8 +66,8 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def find_notification
-      Notification.find_by(join_request: "#{current_user.id}")
+    def find_notification(id)
+      Notification.find_by(project_id: id, join_request: "#{current_user.id}")
     end
   end
 end

@@ -50,12 +50,13 @@ class ProjectsController < ApplicationController
 
     post '/projects/:id/join' do
         if logged_in? && !find_project(params[:id]).users.include?(current_user)
-            unless find_notification
+            unless find_notification(params[:id])
                 Notification.create(project_id: params[:id], join_request: "#{current_user.id}")
                 flash[:notices] = ["Requested to join project."]
-                redirect "/users"
+                redirect "/projects/#{params[:id]}"
             else
                 flash[:notices] = ["You have already requested to join."]
+                redirect "/projects/#{params[:id]}"
             end
         else
             redirect '/login'
@@ -110,7 +111,7 @@ class ProjectsController < ApplicationController
     # Deletes a project
     delete '/projects/:id' do
         project = find_project(params[:id])
-        Notifications.all.each{|note| note.delete if note.project_id == params[:id]}
+        Notification.all.each{|note| note.delete if note.project_id == params[:id].to_i}
         project.destroy
 
         flash[:notices] = ["You Have successfully deleted project."]

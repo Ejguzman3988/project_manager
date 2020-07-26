@@ -15,54 +15,54 @@
                 <input type="hidden" name="_method" value="delete">
                 <% if current_user == @user %>
                     <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button>
-
-                    <div>
-                        <% @notifications.each do |note| %>
-                            <% requester = User.find(note.join_request.to_i) %>
-                            <h5 class="text-color yellow lighten-3" id="notification">
-                                <a href="/users/<%=requester.id%>"><%= requester.username %></a> wants to join this project.
-                                <div id="question">
-                                    <form action="/projects/<%=@projects.id%>/notifications/<%=note.id%>/accept" method="post">
-                                        <button>Accept</button>
-                                    </form>
-
-                                    <form action="/projects/<%=@projects.id%>/notifications/<%=note.id%>/decline" method="post">
-                                        <button>Decline</button>
-                                    </form>
-                                </div>
-                                <p id="response"></p>
-                            </h5>
-                        <% end %>
-                    </div>
                 <% end %>
             </form>
+            <!-- Notifications -->
+            <div>
+                <% if current_user == @user %>
+                    <% @notifications.each do |note| %>
+                        <% requester = User.find(note.join_request.to_i) %>
+                        <h6 class="text-color yellow lighten-3" id="notification">
+                            <a href="/users/<%=requester.id%>"><%= requester.username %></a> Has requested to join this project. 
+                            <div id="question" style="display:inline">
+                                <form action="/notifications/<%=note.id%>/accept" method="post" style="display:inline">
+                                    <button>Accept</button>
+                                </form>
+                                <form action="/notifications/<%=note.id%>/decline" method="post" style="display:inline">
+                                    <button>Decline</button>
+                                </form>
+                            </div>
+                            <p id="response"></p>
+                        </h6>
+                    <% end %>
+                <% end %>
+            </div>
+            <!-- Notifications End-->
         </div>
     <% else %>
-        <form action="/projects/<%=@project.id%>/join" method="post">
-            <input type="submit" value="Join Request">
-        </form>
+        <% unless Notification.find_by(project_id: @project.id, join_request: "#{current_user.id}") %>
+            <form action="/projects/<%=@project.id%>/join" method="post">
+                <input type="submit" value="Join Request">
+            </form>
+        <% else %>
+            <button disabled="disabled">Join Requested</button>
+        <% end %>
     <% end %>
     <br>
     <div>
-        <p style="text-align:center">
+        <p>
             <%= @project.description %>
         </p>
     </div>
+
+    <div>
+        <h5>Users:</h5>
+        <p>
+            <% @project.users.each do |user|%>
+                <li>
+                    <a href="/users/<%=user.id%>"><%=user.username%></a>
+                </li>
+            <% end %>
+        </p>
+    </div>
 </div>
-
-<script>
-function accept(note) {
-  document.getElementById("question").remove()
-  var x = document.createElement("h6")
-  x.innerHTML = `Accepted <%Notification.find_by(project_id: @project.id).user_id=%>${note}</%>`
-  document.getElementById("notification").appendChild(x)
-};
-
-function decline() {
-  document.getElementById("question").remove()
-  var x = document.createElement("h6")
-  x.innerHTML = "Declined"
-  document.getElementById("notification").appendChild(x)
-  
-};
-</script>
