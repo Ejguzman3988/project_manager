@@ -22,12 +22,15 @@
                             <h5 class="text-color yellow lighten-3" id="notification">
                                 <a href="/users/<%=requester.id%>"><%= requester.username %></a> wants to join this project.
                                 <div id="question">
-                                    <button type="button" onclick="accept(<%=note.join_request%>)
-                                    ">Accept</button>
+                                    <form action="/projects/<%=@projects.id%>/notifications/<%=note.id%>/accept" method="post">
+                                        <button>Accept</button>
+                                    </form>
 
-                                    <button type="button" onclick="decline()
-                                    ">Decline</button>
+                                    <form action="/projects/<%=@projects.id%>/notifications/<%=note.id%>/decline" method="post">
+                                        <button>Decline</button>
+                                    </form>
                                 </div>
+                                <p id="response"></p>
                             </h5>
                         <% end %>
                     </div>
@@ -51,11 +54,8 @@
 function accept(note) {
   document.getElementById("question").remove()
   var x = document.createElement("h6")
-  x.innerHTML = "Accepted \<%={number}%>".interpolate({ number: note})
+  x.innerHTML = `Accepted <%Notification.find_by(project_id: @project.id).user_id=%>${note}</%>`
   document.getElementById("notification").appendChild(x)
-  
-  
-
 };
 
 function decline() {
