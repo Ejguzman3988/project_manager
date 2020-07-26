@@ -60,7 +60,16 @@
         <p>
             <% @project.users.each do |user|%>
                 <li>
-                    <a href="/users/<%=user.id%>"><%=user.username%></a>
+                    <a href="/users/<%=user.id%>"><%=user.username%></a> 
+                    <%notification = Notification.find_by(user_id: user.id, project_id: @project.id)%>
+                    <% if current_user.id == @project.user_id %>
+                        <% unless @project.user_id == user.id%>
+                            -
+                            <form action="/notifications/<%=notification.id%>/decline" style="display:inline" method="post">
+                                <input type="submit" value="Kick">
+                            </form>
+                        <% end %>
+                    <% end %>
                 </li>
             <% end %>
         </p>

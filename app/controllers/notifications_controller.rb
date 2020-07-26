@@ -31,8 +31,12 @@ class NotificationsController < ApplicationController
 
     post '/notifications/:id/decline' do
         notification = Notification.find(params[:id])
+        if notification.user_id.nil?
+            flash[:notices] = ["#{User.find(notification.join_request.to_i).username} has NOT been added to your project."]  
+        else
+            flash[:notices] = ["#{User.find(notification.user_id).username} has NOT been added to your project."]  
+        end
         notification.delete
-        flash[:notices] = ["#{User.find(notification.user_id).username} has NOT been added to your project."]
         redirect "/projects/#{notification.project_id}"
     end
 end
