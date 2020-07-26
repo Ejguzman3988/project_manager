@@ -34,7 +34,7 @@ class NotificationsController < ApplicationController
         if notification.user_id.nil?
             flash[:notices] = ["#{User.find(notification.join_request.to_i).username} has NOT been added to your project."]  
         else
-            flash[:notices] = ["#{User.find(notification.user_id).username} has NOT been added to your project."]  
+            flash[:notices] = ["#{User.find(notification.user_id).username} has been kicked."]  
         end
         notification.delete
         redirect "/projects/#{notification.project_id}"
