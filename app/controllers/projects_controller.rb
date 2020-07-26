@@ -41,6 +41,7 @@ class ProjectsController < ApplicationController
     get '/projects/:id/edit' do
         if logged_in? && current_user.projects.find(params[:id])
             find_project(params[:id])
+            @user = User.find(@project.user_id)
             erb :'projects/edit'
         else
             flash[:errors] = ["You don't have access to edit this project."]

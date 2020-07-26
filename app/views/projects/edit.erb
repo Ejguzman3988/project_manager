@@ -1,7 +1,10 @@
 <h1>Edit Project</h1>
 <form action="/projects/<%=@project.id%>" method="post" style="text-align:right">
     <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="red lighten-2 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button> 
+
+    <% if @user == current_user %>
+        <button type="submit" class="red lighten-2 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button> 
+    <% end %>
 </form>
 
 <div class="row">
