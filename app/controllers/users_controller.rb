@@ -79,11 +79,11 @@ class UsersController < ApplicationController
             user.projects.each do |project|
                 project.delete
             end
-            user.notifications.each do |note|
-                note.delete
+            Notification.all.each do |note|
+                note.delete if note.user_id == user.id
             end
-            user.tasks.each do |task|
-                task.delete
+            task.all.each do |task|
+                task.delete if task.user_id == user.id
             end
 
             user.delete
