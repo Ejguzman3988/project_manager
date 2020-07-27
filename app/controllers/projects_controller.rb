@@ -114,6 +114,9 @@ class ProjectsController < ApplicationController
     delete '/projects/:id' do
         project = find_project(params[:id])
         Notification.all.each{|note| note.delete if note.project_id == params[:id].to_i}
+        project.tasks.each do |task|
+            task.delete
+        end
         project.destroy
 
         flash[:notices] = ["You Have successfully deleted project."]
