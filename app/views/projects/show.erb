@@ -5,7 +5,8 @@
     <% if @project.users.include?(current_user) %>
         <strong>
             <h5 class="green-text text-color grey lighten-4">
-                You are part of this project.
+                You are part of this project. <a href="/projects/<%=@project.id%>/tasks"class="green lighten-2 waves-effect waves-light btn-small right">View Tasks</a> 
+                <a href="/projects/<%=@project.id%>/tasks/new" class="bluegreen lighten-2 waves-effect waves-light btn-small right" style="margin-right:5px">New Task</a>
             </h5>
         </strong>
         <br>
@@ -17,6 +18,7 @@
                     <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button>
                 <% end %>
             </form>
+
             <!-- Notifications -->
             <div>
                 <% if current_user == @user %>

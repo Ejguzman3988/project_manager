@@ -47,6 +47,9 @@
           <li class="right">
             <a href="/notifications"><i class="material-icons left" style="margin-top: 3px; margin-right: 5px;">notifications</i>Notifications</a>
           </li>
+          <li class="right">
+            <a href="/users/<%=current_user.id%>/tasks"><i class="material-icons left" style="margin-top: 3px; margin-right: 5px;">today </i>Tasks</a>
+          </li>
         </ul>
       <% else %>  
         <a href="/"><i class="material-icons left" style="font-size: 40px; margin-top: 3px; margin-right: 5px;">home</i>P/M</a>
@@ -54,7 +57,7 @@
           <li>
             <a href="/signup"><i class="material-icons right" style="margin-top: 3px; margin-left: 5px;">library_add</i>Sign Up</a>
           </li>
-          <li>
+          <li> 
             <a href="/login"><i class="material-icons right" style="margin-top: 3px; margin-left: 5px;" >login</i>Log In</a>
           </li>
         </ul>
@@ -145,7 +148,7 @@
 
       // CHaracter Counter
       $(document).ready(function() {
-        $('input#input_text, textarea#project_name, textarea#project_description').characterCounter();
+        $('input#task_name, textarea#project_name, textarea#project_description').characterCounter();
       });
     
     </script>        

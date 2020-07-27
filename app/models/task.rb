@@ -4,7 +4,10 @@ class Task < ActiveRecord::Base
 
     validates :name, 
     length: { maximum: 20}, 
-    presence: true, uniqueness: {scope: :user_id}
+    presence: true, uniqueness: {scope: :project_id}
+
+    validates :description, 
+    length: { maximum: 5000}
 
     validates :user_id, presence: true
 
