@@ -82,7 +82,7 @@ class UsersController < ApplicationController
             Notification.all.each do |note|
                 note.delete if note.user_id == user.id
             end
-            task.all.each do |task|
+            Task.all.each do |task|
                 task.delete if task.user_id == user.id
             end
 
