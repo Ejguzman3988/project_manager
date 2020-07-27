@@ -7,17 +7,15 @@
     </h5>
     <p>
         <%if current_user.id == @task.user_id || current_user.id == find_project(@task.project_id).user_id%>
-            <a href="/tasks/<%=@task.id%>/edit">Edit Task</a>
+            <a href="/tasks/<%=@task.id%>/edit" class="green darken-4 waves-effect waves-light btn-small">Edit Task</a>
         <% end %>
-        <% unless @task.completed == true %>
             <form action="/tasks/<%=@task.id%>" method="post">
-                <input name="task[completed][true]" type="submit" value="Complete">
-            </form>
-        <% else %>
-            <form action="/tasks/<%=@task.id%>" method="post">
-                <input name="task[completed][false]" type="submit" value="Not Complete">
-            </form>
-        <% end %>
+            <% unless @task.completed == true %>
+                    <button name="task[completed]" value="true" class="grey darken-4 waves-effect waves-light btn-small">Complete</button>
+            <% else %>
+                    <button name="task[completed]" value="false" class="grey darken-4 waves-effect waves-light btn-small">Not Complete</button>
+            <% end %>
+        </form>
     </p>
 </div>
 <div>

@@ -1,32 +1,40 @@
 <h1>Tasks:</h1>
 
-<div>
+<div class="row">
     <% @tasks.each do |task| %>
-        <label>
-            <form action="/tasks/<%=task.id%>" method="post" class='card'>
-                <input type="hidden" name="_method" value="patch">
-                <input type="checkbox" <%if task.completed == true%> checked='checked' disabled='disabled' value = "false" <%else%>value="true"<% end %>>
-                <span>
-                    <a href="/tasks/<%=task.id%>">
-                        <%= task.name %>
-                    </a> 
+        <div class="col s12 m5 l4">
+            <label>
+                <form action="/tasks/<%=task.id%>" method="post" class='card-panel yellow lighten-'>
+                    <input type="checkbox" <%if task.completed == true%> checked='checked' disabled='disabled' value = "false" <%else%>value="true"<% end %>>
+                    <span>
+                        <a href="/tasks/<%=task.id%>"class="waves-effect waves-teal btn-flat">
+                            <h6><%= task.name %></h6>
+                        </a> 
+                        <br>
+                        assigned to, 
 
-                    assigned to, 
-
-                    <a href="/users/<%=task.user_id%>">
-                        <%=User.find(task.user_id).username%>
-                    </a> 
-                    
-                    for: 
-                    
-                    <a href="/projects/<%=task.project_id%>">
-                        <%=Project.find(task.project_id).name%>
-                    </a>
-                    <% if !task.deadline.nil? %>
-                    DEADLINE: <%= task.deadline %>
-                      
-                    <% end %>
-            </form>
-        </label>
+                        <a href="/users/<%=task.user_id%>">
+                            <%=User.find(task.user_id).username%>
+                        </a> 
+                        <div>
+                            For: 
+                            
+                            <a href="/projects/<%=task.project_id%>" class="waves-effect waves-teal btn-flat">
+                                <%=Project.find(task.project_id).name%>
+                            </a>
+                        </div>
+                        <% if !task.deadline.nil? %>
+                        DEADLINE: <%= task.deadline %>
+                        <% end %>
+                    <div>
+                        <% if task.completed == true %>
+                            <button name="task[completed]" value="false" class="grey darken-4 waves-effect waves-light btn-small">Not Complete</button>
+                        <% else %>
+                            <button name="task[completed]" value="true" class="grey darken-4 waves-effect waves-light btn-small">Complete</button>
+                        <% end %>
+                    </div>
+                </form>
+            </label>
+        </div>
     <% end %>
 </div>

@@ -59,6 +59,18 @@ class TasksController < ApplicationController
         end
     end
 
+    post '/tasks/:id' do
+        task = Task.find(params[:id])
+        if task.update(params[:task])
+            flash[:notices] = ["Updated"]
+            redirect "/tasks/#{params[:id]}"
+        else
+            flash[:errors] = task.errors.full_messages
+            redirect "/tasks/#{params[:id]}"
+        end
+        
+    end
+
     post '/projects/:id/tasks' do
         task = Task.new(params[:project][:task])
         task.project_id = params[:id]
@@ -75,7 +87,6 @@ class TasksController < ApplicationController
 
     patch '/tasks/:id' do 
         task = Task.find(params[:id])
-        binding.pry
         if task.update(params[:project][:task])
             flash[:notices] = ["Updated task"]
             redirect "/tasks/#{params[:id]}"
