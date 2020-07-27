@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
     has_many :notifications
     has_many :users, through: :notifications
+    has_many :tasks
 
     validates :name, 
     length: { maximum: 20}, 
