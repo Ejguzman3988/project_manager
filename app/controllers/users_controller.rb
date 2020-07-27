@@ -79,13 +79,13 @@ class UsersController < ApplicationController
             user.projects.each do |project|
                 project.delete
             end
-            user.notifictions.each do |note|
+            user.notifications.each do |note|
                 note.delete
             end
             user.tasks.each do |task|
                 task.delete
             end
-            
+
             user.delete
             session.clear
             flash[:notices] = ["Successfully deleted Account."]
