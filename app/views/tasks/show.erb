@@ -1,0 +1,49 @@
+<div>
+    <h1>
+        <%= @task.name %>
+    </h1>
+    <h5>
+        assigned to, <a href="/users/<%= @user.id%>"><%= @user.username %></a>
+    </h5>
+    <p>
+        <%if current_user.id == @task.user_id || current_user.id == find_project(@task.project_id).user_id%>
+            <a href="/tasks/<%=@task.id%>/edit">Edit Task</a>
+        <% end %>
+        <% unless @task.completed == true %>
+            <form action="/tasks/<%=@task.id%>" method="post">
+                <input name="task[completed][true]" type="submit" value="Complete">
+            </form>
+        <% else %>
+            <form action="/tasks/<%=@task.id%>" method="post">
+                <input name="task[completed][false]" type="submit" value="Not Complete">
+            </form>
+        <% end %>
+    </p>
+</div>
+<div>
+    <% unless @task.deadline.nil? %>
+        <p>
+            due by, <%= @task.deadline %>
+        </p>
+    <% else %>
+        <p>
+            No deadline specified.
+        </p>
+    <% end %>
+</div>
+
+<div>
+    <h5>
+        Description:
+    </h5>
+
+    <% unless @task.description.nil? || @task.description.empty? %>
+        <p>
+            <%= @task.description %>
+        </p>
+    <% else %>
+        <p>
+            No description provided.
+        </p>
+    <% end %>
+</div>

@@ -1,0 +1,45 @@
+<h1>Edit Tasks</h1>
+<div class="row">
+    <form class="col s12" action="/tasks/<%=@task.id%>"  method="post">
+        <input type="hidden" name="_method" value="patch">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="project[task][name]" id="task_name" data-length="20" value="<%=@task.name%>">
+                <label for="task_name">Task Name:</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <h5>
+                    Assign User:
+                </h5>
+                <% @project.users.each do |user| %>
+                    <li>
+                        <label>
+                            <input type="radio" name="project[task][user_id]" id="project_user" value="<%=user.id%>" <%if @task.user_id == user.id%> checked <%end%>>
+                            <span><%= user.username %></span>
+                        </label>
+                    </li>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="project[task][description]" id="project_description" class="materialize-textarea" data-length="5000">"<%=@task.description%>"</textarea>
+                <label for="project_description" style="font-size:22px">Task Description</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="project[task][deadline]" id="task_deadline" value="<%=@task.deadline%>">
+                <label for="task_deadline">Deadline (MM/DD/YYYY HH:MM AM/PM)</label>
+            </div>
+        </div>
+
+        <br>
+        <button type="submit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">assignment</i> Edit Task</button> 
+    </form>
+</div>

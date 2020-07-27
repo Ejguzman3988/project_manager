@@ -1,0 +1,32 @@
+<h1>Tasks:</h1>
+
+<div>
+    <% @tasks.each do |task| %>
+        <label>
+            <form action="/tasks/<%=task.id%>" method="post" class='card'>
+                <input type="hidden" name="_method" value="patch">
+                <input type="checkbox" <%if task.completed == true%> checked='checked' disabled='disabled' value = "false" <%else%>value="true"<% end %>>
+                <span>
+                    <a href="/tasks/<%=task.id%>">
+                        <%= task.name %>
+                    </a> 
+
+                    assigned to, 
+
+                    <a href="/users/<%=task.user_id%>">
+                        <%=User.find(task.user_id).username%>
+                    </a> 
+                    
+                    for: 
+                    
+                    <a href="/projects/<%=task.project_id%>">
+                        <%=Project.find(task.project_id).name%>
+                    </a>
+                    <% if !task.deadline.nil? %>
+                    DEADLINE: <%= task.deadline %>
+                      
+                    <% end %>
+            </form>
+        </label>
+    <% end %>
+</div>

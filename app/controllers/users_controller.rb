@@ -24,6 +24,9 @@ class UsersController < ApplicationController
         if logged_in?
             @user = User.find(params[:id])
             @projects = @user.projects
+            @notifications = Notification.all.find_all do |note|
+                find_project(note.project_id).user_id == @user.id && note.user_id.nil?
+            end
             erb :'/users/show'
         else
             redirect "/login"
@@ -49,11 +52,23 @@ class UsersController < ApplicationController
     patch '/users/:id' do
         sanitize_params(params)
         user = current_user
-        if user.authenticate(params[:user][:old_password]) && user.update(name: params[:user][:name], username: params[:user][:username], password: params[:user][:new_password] )
-            redirect "/users/#{params[:id]}"
+        test_user = User.new(password: params[:user][:new_password])
+        test_user.valid? 
+        new_password_error_message = test_user.errors.full_messages_for(:password).join
+
+        if user.authenticate(params[:user][:old_password])
+            if user.update(name: params[:user][:name], username: params[:user][:username], password: params[:user][:new_password]) &&  new_password_error_message.blank?
+                flash[:notices] = ["Your user profile has been saved."]
+                redirect "/users/#{params[:id]}"
+            else
+                flash[:errors] = user.errors.full_messages
+                flash[:errors] << new_password_error_message
+            end
         else
-            redirect "/users/#{params[:id]}/edit"
+            flash[:errors] = ["Incorrect password"]
         end
+
+        redirect "/users/#{params[:id]}/edit"
         
     end
 

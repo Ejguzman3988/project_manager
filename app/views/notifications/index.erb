@@ -1,0 +1,29 @@
+<div>
+    <h3>
+        You have <%= @notifications.length %> notifications!
+    </h3>
+</div>
+
+<div>
+    <ul>
+        <% unless @notifications.empty? %>
+            <% @notifications.each do |note| %>
+                <li>
+                    <a href="/users/<%=User.find(note.join_request.to_i).id%>">
+                        <%= User.find(note.join_request.to_i).username %></a> has requested to join <a href="/projects/<%=note.project_id%>"><%= find_project(note.project_id).name %>
+                    </a>
+                    <div id="question" style="display:inline">
+                        
+                        <form action="/notifications/<%=note.id%>/accept" method="post" style="display:inline">
+                            <button>Accept</button>
+                        </form>
+
+                        <form action="/notifications/<%=note.id%>/decline" method="post" style="display:inline">
+                            <button>Decline</button>
+                        </form>
+                    </div>
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
+</div>

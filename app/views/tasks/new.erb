@@ -1,0 +1,44 @@
+<h1>New Tasks</h1>
+<div class="row">
+    <form class="col s12" action="/projects/<%=@project.id%>/tasks"  method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="project[task][name]" id="task_name" data-length="20">
+                <label for="task_name">Task Name:</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <h5>
+                    Assign User:
+                </h5>
+                <% @project.users.each do |user| %>
+                    <li>
+                        <label>
+                            <input type="radio" name="project[task][user_id]" id="project_user" value="<%=user.id%>">
+                            <span><%= user.username %></span>
+                        </label>
+                    </li>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="project[task][description]" id="project_description" class="materialize-textarea" data-length="5000"></textarea>
+                <label for="project_description" style="font-size:22px">Task Description</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" name="project[task][deadline]" id="task_deadline">
+                <label for="task_deadline">Deadline (MM/DD/YYYY HH:MM AM/PM)</label>
+            </div>
+        </div>
+
+        <br>
+        <button type="submit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">assignment</i> Create Task</button> 
+    </form>
+</div>

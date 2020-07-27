@@ -1,5 +1,13 @@
 class Project < ActiveRecord::Base
-    belongs_to :user
-    before_validation :autosave_associated_records_for_user
-    validates :name, presence: true, uniqueness: {scope: :user_id}
+    has_many :notifications
+    has_many :users, through: :notifications
+    has_many :tasks
+
+    validates :name, 
+    length: { maximum: 20}, 
+    presence: true, uniqueness: {scope: :user_id}
+
+    validates :description, 
+    length: { maximum: 5000}
 end
+
