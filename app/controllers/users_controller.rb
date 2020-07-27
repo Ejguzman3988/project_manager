@@ -80,7 +80,7 @@ class UsersController < ApplicationController
                 project.delete
             end
             Notification.all.each do |note|
-                note.delete if note.user_id == user.id
+                note.delete if note.user_id == user_id || note.join_request.to_i == user.id
             end
             Task.all.each do |task|
                 task.delete if task.user_id == user.id
