@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
             if @user == current_user    
                 @user.projects.each do |project|
                     if project.user_id == @user.id
-                        @notifications << project.notifications.find_all{|note| note.user_id != @user.id}
+                        @notifications << project.notifications.find_all{|note| note.user_id != @user.id && note.join_request =! "accept"}
                     end
                 end
             end
