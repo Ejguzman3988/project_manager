@@ -24,7 +24,13 @@
                 <div class="brown lighten-2 card-image waves-effect waves-block waves-light">
                     <img class="activator" src="<%=project.img_link%>">
                 </div>
-                <div class="blue-grey darken-4  card-content">
+                <% if project.user_id != @user.id %>
+                    <div class="green darken-2  card-content">
+                    <h6 class="white-text">JOINED</h6>
+                <% else %>
+                    <div class="blue-grey darken-4  card-content">
+                    <h6 class="white-text">OWNED</h6>
+                <% end %>
                     <span class="card-title activator white-text"><%= project.name %><i class="material-icons right">more_vert</i></span>
                     <p><a href="/projects/<%=project.id%>">Go to project</a></p>
                     <p class="white-text">Created by, <a href="/users/<%=project.user_id%>"><%= User.find(project.user_id).username %></a></p>

@@ -20,13 +20,31 @@ class UsersController < ApplicationController
 
     # Shows all of specified users projects
     get '/users/:id' do 
-        # TODO: view your profile. 
         if logged_in?
             @user = User.find(params[:id])
-            @projects = @user.projects
-            @notifications = Notification.all.find_all do |note|
-                find_project(note.project_id).user_id == @user.id && note.user_id.nil?
+            @projects = []
+            projects = @user.projects
+            projects.each do |project|
+                if project.user_id == @user.id
+                    @projects << project
+                else
+                    project.notifications.each do |note|
+                        if note.user_id == @user.id
+                            @projects << project if note.join_request == "accept"
+                        end
+                    end
+                end
             end
+            
+            @notifications = []
+            if @user == current_user    
+                @user.projects.each do |project|
+                    if project.user_id == @user.id
+                        @notifications << project.notifications.find_all{|note| note.user_id != @user.id}
+                    end
+                end
+            end
+            @notifications = @notifications.flatten
             erb :'/users/show'
         else
             redirect "/login"

@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
         if logged_in?
             find_project(params[:id])
             @user = User.find(@project.user_id)
-            @notifications = Notification.all.find_all{|note| note.project_id == params[:id].to_i && note.user_id == nil}
+            @notifications = Notification.all.find_all{|note| note.project_id == params[:id].to_i && note.join_request == nil && @project.user_id != note.user_id}
             erb :'projects/show'
         else
             flash[:errors] = ["Must be logged in to view project."]
@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
     post '/projects/:id/join' do
         if logged_in? && !find_project(params[:id]).users.include?(current_user)
             unless find_notification(params[:id])
-                notification = current_user.notifications.create(project_id: params[:id], join_request: "#{current_user.id}")
+                notification = current_user.notifications.create(project_id: params[:id])
                 flash[:notices] = ["Requested to join project."]
                 redirect "/projects/#{params[:id]}"
             else
