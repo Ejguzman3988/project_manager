@@ -76,16 +76,10 @@ class UsersController < ApplicationController
     delete '/users/:id' do
         user = current_user
         if user.id == params[:id].to_i
-            user.projects.each do |project|
-                project.delete
-            end
-            Notification.all.each do |note|
-                note.delete if note.user_id == user.id || note.join_request.to_i == user.id
-            end
-            Task.all.each do |task|
-                task.delete if task.user_id == user.id
-            end
-
+            user.projects.where(user_id: user.id).destroy_all
+            user.notifications.where(user_id: user.id).destroy_all
+            user.notifications.where(join_request: user.id).destroy_all
+            user.tasks.where(user_id: user.id).destroy_all
             user.delete
             session.clear
             flash[:notices] = ["Successfully deleted Account."]
