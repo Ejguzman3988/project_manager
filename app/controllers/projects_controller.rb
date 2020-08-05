@@ -114,7 +114,7 @@ class ProjectsController < ApplicationController
     delete '/projects/:id' do
         project = find_project(params[:id])
         project.notifications.where(project_id: project.id).destroy_all
-        project.tasks.where(project_id: project_id).destroy_all
+        project.tasks.where(project_id: project.id).destroy_all
         project.destroy
         
         flash[:notices] = ["You Have successfully deleted project."]
