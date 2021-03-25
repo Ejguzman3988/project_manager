@@ -1,18 +1,14 @@
 development:
   adapter: postgresql
-  encoding: unicode
   database: development
   pool: 2
-  host: localhost
-  user: ejguzman3988
-  password: Leomegdav2
+  timeout: 5000
 
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
   host: <%= ENV['DATABASE_HOST'] %>
-  user: ejguzman3988
-  password: Leomegdav2
+  user: <%= ENV['USER'] %>
+  password: <%= ENV['PASS'] %>
   database: production
-  
