@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     # Shows all of users projects
     get '/users' do
         if logged_in?
-            find_user
+            current_user
             @projects = @user.projects
             erb :'/users/show' 
         else

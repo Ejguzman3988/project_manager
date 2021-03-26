@@ -2,16 +2,17 @@ class NotificationsController < ApplicationController
 
     get "/notifications" do
         if logged_in?
-            find_user
-            @notifications = []
-            if @user == current_user    
-                @user.projects.each do |project|
-                    if project.user_id == @user.id
-                        @notifications << project.notifications.find_all{|note| note.user_id != @user.id && note.join_request == nil}
-                    end
-                end
-            end
-            @notifications = @notifications.flatten
+            current_user
+            # @notifications = []
+          
+                # current_user.projects.each do |project|
+                #     if current_user.projects.inlcude?(project)
+                #         @notifications << project.notifications.find_all{|note| note.user_id != @user.id && note.join_request == nil}
+                #     end
+                # end
+
+            # @notifications = @notifications.flatten
+            @notifications = current_user.notifications
 
 
             erb :'/notifications/index'
