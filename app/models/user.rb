@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+    has_many :created_projects, foreign_key: "user_id", class_name: "Project"
+
     has_many :notifications
     has_many :projects, through: :notifications
     has_many :tasks

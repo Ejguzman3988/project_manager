@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         if logged_in?
             @user = User.find(params[:id])
         
-            @projects = @user.accepted_projects
+            @projects = @user.projects
             @notifications = @user.notifications.filter{|n| n.user != current_user && note.join_request == nil }
             erb :'/users/show'
         else
