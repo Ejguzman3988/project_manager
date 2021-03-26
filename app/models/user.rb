@@ -7,4 +7,10 @@ class User < ActiveRecord::Base
     validates :name, presence: true, length: {maximum: 20}
     validates :username, presence: true, uniqueness: true, length: {maximum: 18}
 
+    def accepted_projects 
+        accepted_notes = self.notifications.filter{|note| note.join_request == 'accept'}
+        accepted_notes.map { |note| note.project }
+
+    end
+
 end

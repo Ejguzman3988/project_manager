@@ -67,12 +67,12 @@ class ProjectsController < ApplicationController
 
     # Adds a valid project to db
     post '/projects' do 
-        find_user
+        current_user
         sanitize_params(params)
         if params[:user][:project][:img_link].blank?
             params[:user][:project][:img_link] = DEFAULT_IMG
         end
-        params[:user][:project][:user_id] = @user.id
+    
         @project = @user.projects.build(params[:user][:project])
 
         
