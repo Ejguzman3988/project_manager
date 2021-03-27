@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
         accepted_notes.map { |note| note.project }
     end
 
+    def not_our_notes
+        self.created_projects.map{|p| p.notifications.filter{|n| n.join_request != true && n.user_id != self.id }}.flatten
+    end
+
 end

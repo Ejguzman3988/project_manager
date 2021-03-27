@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
                 #     if current_user.projects.inlcude?(project)
                 #         @notifications << project.notifications.find_all{|note| note.user_id != @user.id && note.join_request == nil}
                 #     end
-                # end
+            # en
 
             # @notifications = @notifications.flatten
             @notifications = current_user.notifications
