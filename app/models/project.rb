@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
     length: { maximum: 5000}
 
     def accepted_users
-        accepted_notes = self.notifications.filter{|note| note.join_request == 'accept'}
+        accepted_notes = self.notifications.filter{|note| note.join_request == true}
         accepted_notes.map { |note| note.user }
     end
 end

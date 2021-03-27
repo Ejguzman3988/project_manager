@@ -24,7 +24,7 @@ class NotificationsController < ApplicationController
 
     post '/notifications/:id/accept' do
         notification = Notification.find(params[:id])
-        notification.join_request = "accept"
+        notification.join_request = true
         notification.save
         flash[:notices] = ["#{User.find(notification.user_id).username} has been added to your project."]
         redirect "/projects/#{notification.project_id}"
@@ -32,12 +32,21 @@ class NotificationsController < ApplicationController
 
     post '/notifications/:id/decline' do
         notification = Notification.find(params[:id])
-        if notification.join_request.nil?
-            flash[:notices] = ["#{User.find(notification.user_id).username} has NOT been added to your project."]  
-        else
-            flash[:notices] = ["#{User.find(notification.user_id).username} has been kicked."]  
-        end
+        flash[:notices] = ["#{User.find(notification.user_id).username} has NOT been added to your project."]  
+
         notification.delete
         redirect "/projects/#{notification.project_id}"
     end
+    
+    delete '/notifications/:id' do
+        notification = Notification.find(params[:id])
+
+        redirect_id = notification.project_id
+
+        flash[:notices] = ["#{User.find(notification.user_id).username} has been kicked."]  
+        notification.delete
+        redirect "/projects/#{redirect_id}"
+    end
+
+
 end

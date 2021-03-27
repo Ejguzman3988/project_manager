@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
         if logged_in?
             find_project(params[:id])
             @user = User.find(@project.user_id)
+            @accepted_users = @project.accepted_users
             @notifications = Notification.all.find_all{|note| note.project_id == params[:id].to_i && note.join_request == nil && @project.user_id != note.user_id}
             erb :'projects/show'
         else
