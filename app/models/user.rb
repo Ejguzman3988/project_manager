@@ -10,12 +10,13 @@ class User < ActiveRecord::Base
     validates :username, presence: true, uniqueness: true, length: {maximum: 18}
 
     def accepted_projects 
-        accepted_notes = self.notifications.filter{|note| note.join_request == 'accept'}
-        accepted_notes.map { |note| note.project }
+        Project.joins(:notifications).where("notifications.user_id = ? and notifications.join_request = true", self.id)
+        
     end
 
     def not_our_notes
-        self.created_projects.map{|p| p.notifications.filter{|n| n.join_request != true && n.user_id != self.id }}.flatten
+        Notification.joins(:project).where("projects.user_id = ? and (notifications.join_request IS NULL or notifications.join_request = false) and notifications.user_id != ?",self1.id,self1.id).select(:project_id, :user_id, :join_request).distinct
     end
 
 end
+

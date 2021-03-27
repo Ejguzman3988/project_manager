@@ -2,16 +2,6 @@ class NotificationsController < ApplicationController
 
     get "/notifications" do
         if logged_in?
-            current_user
-            # @notifications = []
-          
-                # current_user.projects.each do |project|
-                #     if current_user.projects.inlcude?(project)
-                #         @notifications << project.notifications.find_all{|note| note.user_id != @user.id && note.join_request == nil}
-                #     end
-            # en
-
-            # @notifications = @notifications.flatten
             @notifications = current_user.not_our_notes
 
 

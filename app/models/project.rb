@@ -9,10 +9,10 @@ class Project < ActiveRecord::Base
 
     validates :description, 
     length: { maximum: 5000}
+    
 
     def accepted_users
-        accepted_notes = self.notifications.filter{|note| note.join_request == true}
-        accepted_notes.map { |note| note.user }
+        User.joins(:notifications).where("notifications.project_id = ? and notifications.join_request = true", self1.id)
     end
 end
 
