@@ -12,7 +12,7 @@ class NotificationsController < ApplicationController
             # en
 
             # @notifications = @notifications.flatten
-            @notifications = current_user.notifications
+            @notifications = current_user.not_our_notes
 
 
             erb :'/notifications/index'
@@ -25,8 +25,11 @@ class NotificationsController < ApplicationController
     post '/notifications/:id/accept' do
         notification = Notification.find(params[:id])
         notification.join_request = true
-        notification.save
-        flash[:notices] = ["#{User.find(notification.user_id).username} has been added to your project."]
+        if notification.save
+            flash[:notices] = ["#{User.find(notification.user_id).username} has been added to your project."]
+        else
+            flash[:notices] = notification.erors.full_messages
+        end
         redirect "/projects/#{notification.project_id}"
     end
 

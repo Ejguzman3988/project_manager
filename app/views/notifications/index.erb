@@ -9,7 +9,7 @@
         <% unless @notifications.empty? %>
             <% @notifications.each do |note| %>
                 <li>
-                    <a href="/users/<%=User.find(note.user_id).id%>">
+                    <a href="/users/<%=note.user_id%>">
                         <%= User.find(note.user_id).username %></a> has requested to join <a href="/projects/<%=note.project_id%>"><%= find_project(note.project_id).name %>
                     </a>
                     <div id="question">
