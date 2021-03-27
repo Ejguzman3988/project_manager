@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
     def accepted_projects 
         accepted_notes = self.notifications.filter{|note| note.join_request == 'accept'}
         accepted_notes.map { |note| note.project }
-
     end
 
 end

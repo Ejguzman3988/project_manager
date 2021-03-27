@@ -12,7 +12,7 @@
                 <% if project.user_id == current_user.id %>
                         <div class="black card-content">
                         <h6 class="white-text">OWNED</h6>
-                <% elsif project.users.include?(current_user)%>
+                <% elsif project.accepted_users.include?(current_user)%>
                         <div class="green darken-2 card-content">
                         <h6 class="white-text">JOINED</h6>
                 <% else %>

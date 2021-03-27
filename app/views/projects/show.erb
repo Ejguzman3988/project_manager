@@ -26,11 +26,11 @@
                         <% requester = User.find(note.user_id) %>
                         <h6 class="text-color yellow lighten-3" id="notification">
                             <a href="/users/<%=requester.id%>"><%= requester.username %></a> Has requested to join this project. 
-                            <div id="question"
-                                <form action="/notifications/<%=note.id%>/accept" method="post"
+                            <div id="question">
+                                <form action="/notifications/<%=note.id%>/accept" method="post">
                                     <button>Accept</button>
                                 </form>
-                                <form action="/notifications/<%=note.id%>/decline" method="post"
+                                <form action="/notifications/<%=note.id%>/decline" method="post">
                                     <button>Decline</button>
                                 </form>
                             </div>
@@ -59,11 +59,9 @@
 
     <div>
         <h5>Users:</h5>
-        <p>
-            <% @project.users.each do |user|%>
-                <% if user.notifications.find_by(project_id: @project.id).join_request == nil && @project.user_id != user.id%> 
-                        <% next %>
-                    <% end %>
+        <ul>
+            <li><a href="/users/<%=@user.id%>"><%=@user.username%></a></li> 
+            <% @project.accepted_users.each do |user|%>
                 <li>
                     <a href="/users/<%=user.id%>"><%=user.username%></a> 
                     <%notification = Notification.find_by(user_id: user.id, project_id: @project.id)%>
@@ -77,6 +75,6 @@
                     <% end %>
                 </li>
             <% end %>
-        </p>
+        </ul>
     </div>
 </div>
