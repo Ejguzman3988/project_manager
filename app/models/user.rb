@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     end
 
     def not_our_notes
-        Notification.joins(:project).where("projects.user_id = ? and (notifications.join_request IS NULL or notifications.join_request = false) and notifications.user_id != ?",self1.id,self1.id).select(:project_id, :user_id, :join_request).distinct
+        Notification.joins(:project).where("projects.user_id = ? and (notifications.join_request IS NULL or notifications.join_request = false) and notifications.user_id != ?",self.id,self.id).select(:project_id, :user_id, :join_request).distinct
     end
 
 end
