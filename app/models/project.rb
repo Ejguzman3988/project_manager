@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
     
 
     def accepted_users
-        User.joins(:notifications).where("notifications.project_id = ? and notifications.join_request = true", self1.id)
+        User.joins(:notifications).where("notifications.project_id = ? and notifications.join_request = true", self.id)
     end
 end
 
