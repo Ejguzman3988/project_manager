@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     # Shows all of users projects
     get '/users' do
         if logged_in?
-            @projects = current_user.projects
+            @projects = current_user.created_projects
             erb :'/users/show' 
         else
             redirect '/login'
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         if logged_in?
             @user = User.find(params[:id])
         
-            @projects = @user.projects
+            @projects = @user.created_projects + @user.projects
             @notifications = @user.notifications.filter{|n| n.user != current_user && note.join_request == nil }
             erb :'/users/show'
         else

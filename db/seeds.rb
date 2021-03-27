@@ -18,7 +18,7 @@ total.times do
     Project.create(
         name: Faker::App.name,
         description: Faker::Quote.yoda, 
-        img_link: Faker::LoremFlickr.image(size: "500x300"), 
+        img_link: Faker::Avatar.image, 
         user_id: User.ids.sample
     )
 end
