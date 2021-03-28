@@ -1,18 +1,18 @@
 .fixed-pos {
   position: fixed;
-  top: 0;
-  width: 100%;
-
+  z-index: 999;
   background-color: black;
-  z-index: 5px;
   box-shadow: 10px;
 }
 
 .content {
-  scroll-behavior: smooth;
   position: relative;
 }
 
 .fixed-pos + .content {
   padding-top: 60px;
+}
+
+nav a {
+  position: relative;
 }
