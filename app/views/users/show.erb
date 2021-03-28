@@ -1,14 +1,5 @@
 <h1><%= @user.name %> profile:</h1>
 <div>
-<% if @notifications %>
-</div>
-    <%@notifications.each do |note| %>
-    <p>
-        You have a note for <a href="/projects/<%=note.project_id%>"><%= find_project(note.project_id).name %></a>. 
-    </p>
-    <%end%>
-<div>
-<% end %>
     <a href="/projects/new" class="right grey darken-4 waves-effect waves-light btn-small"><i class="material-icons left" style="margin-right:2px; margin-left:-8px">create_new_folder</i>Create New Project</a>
     
     <% if current_user == @user %>
