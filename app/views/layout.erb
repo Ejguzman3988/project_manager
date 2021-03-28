@@ -21,9 +21,9 @@
     
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
   </head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <!-- Image -->
     <%# <div>
@@ -32,7 +32,7 @@
   <!-- End Image -->
 
   <!-- Navigation -->
-  <nav class="blue-grey darken-3">
+  <nav class="blue-grey darken-3 fixed-pos">
     <div class="container">
       <% if logged_in? %>
         <ul>
@@ -68,7 +68,7 @@
   <!-- End Navigation -->
 
 
-  <div class="container">
+  <div class="container content">
       <!-- Errors -->
       <% if flash[:errors] %>
         <blockquote class="red lighten-3 white-text">
