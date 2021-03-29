@@ -19,6 +19,7 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+
   # Helper functions that are created to be used in controller
   helpers do
     def current_user # Gets current logged in user -> user obj

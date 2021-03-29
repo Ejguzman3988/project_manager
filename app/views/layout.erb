@@ -52,6 +52,12 @@
           <li class="right">
             <a href="/users/<%=current_user.id%>/tasks"><i class="material-icons left">today </i>Tasks</a>
           </li>
+          <li>
+            <form action="/projects/search" method='GET' class="inline">
+              <input type="text" id="autocomplete-input" class="autocomplete" placeholder="search" name="query">
+              <input type="submit" value="search" class="nav-sub blue-grey darken-3 material-icons right">
+            </form>
+          </li>
         </ul>
       <% else %>  
         <a href="/"><i class="material-icons left">home</i>P/M</a>

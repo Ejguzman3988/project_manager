@@ -3,6 +3,12 @@ class ProjectsController < ApplicationController
     
     use Rack::Flash
 
+
+    get '/projects/search' do
+        @projects = Project.search(params[:query])
+        erb :'projects/index'
+    end
+
     # Displays all the projects in the database
     get '/projects' do 
         if logged_in?

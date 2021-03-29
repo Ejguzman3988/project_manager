@@ -16,3 +16,19 @@
 nav a {
   position: relative;
 }
+
+li form {
+  display: inline-block;
+  color: white;
+}
+
+li form input {
+  display: inline-block;
+  position: relative;
+  color: white;
+}
+
+.nav-sub {
+  display: inline-flex;
+  margin-top: -40px;
+}
