@@ -34,29 +34,38 @@
   <body class="grey lighten-2">
   <!-- Navigation -->
   <nav class="blue-grey darken-3 fixed-pos">
-    <div class="container">
+    <div class="nav-wrapper container">
       <% if logged_in? %>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul>
           <li class="left">
             <a href="/users/<%=current_user.id%>"><i class="material-icons left">home</i>P/M</a>
           </li>
+          
           <li class="middle">
-            <a href="/projects"><i class="material-icons left" >image_search</i>Browse</a>
+            <a href="/projects" class="sidenav-trigger"><i class="material-icons left" >image_search</i>Browse</a>
           </li>
           <li class="right">
             <a href="/logout"><i class="material-icons right">exit_to_app</i>Log Out</a>
           </li>
           <li class="right">
-            <a href="/notifications"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
+            <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
           </li>
           <li class="right">
-            <a href="/users/<%=current_user.id%>/tasks"><i class="material-icons left">today </i>Tasks</a>
+            <a href="/users/<%=current_user.id%>/tasks" class="sidenav-trigger"><i class="material-icons left">today </i>Tasks</a>
           </li>
           <li>
-            <form action="/projects/search" method='GET' class="inline">
-              <input type="text" id="autocomplete-input" class="autocomplete" placeholder="search" name="query">
-              <input type="submit" value="search" class="nav-sub blue-grey darken-3 material-icons right">
-            </form>
+           <nav> 
+              <div class="nav-wrapper blue-grey darken-3">
+                <form action="/projects/search" method='GET' class="inline">
+                  <div class="input-field">
+                    <input id="search" type="search" name="query" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                  </div>
+                </form>
+              </div>
+            </nav>
           </li>
         </ul>
       <% else %>  
@@ -73,9 +82,21 @@
     </div>
   </nav>
   <!-- End Navigation -->
+  <ul class="sidenav" id="mobile-demo">
+    <li>
+      <a href="/projects" class="sidenav-trigger"><i class="material-icons left" >image_search</i>Browse</a>
+    </li>
+    
+    <li>
+      <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
+    </li>
+    
+    <li>
+      <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
+    </li>
+  </ul>
 
-
-  <div class="container content">
+  <div class="container">
       <!-- Errors -->
       <% if flash[:errors] %>
         <blockquote class="red lighten-3 white-text">
@@ -105,7 +126,7 @@
       <!-- End Notices -->  
   </div>
     <!--Main Content -->
-    <div class="container white lighten-4 z-depth-3" >
+    <div class="content container white lighten-4 z-depth-3 " >
       <%= yield %>
     </div>
   </div> 
@@ -157,7 +178,10 @@
       $(document).ready(function() {
         $('input#task_name, textarea#project_name, textarea#project_description').characterCounter();
       });
-    
+       $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+            
     </script>        
     
     <!--JavaScript at end of body for optimized loading-->
