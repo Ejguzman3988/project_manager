@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
     length: { maximum: 5000}
     
     def self.search(query)
-        Project.where("projects.name = ?", query)
+        Project.where("LOWER(projects.name) LIKE ?", ['%',query.downcase,'%'].join)
     end
 
     def accepted_users
