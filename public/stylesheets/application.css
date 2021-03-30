@@ -11,13 +11,14 @@
   max-width: 1200px;
   padding: 40px;
   margin: auto;
-  color: white;
+  color: black;
   stroke-opacity: 10%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   animation-name: example;
-  animation-duration: 8s;
+  animation-duration: 4s;
   animation-direction: alternate;
   animation-iteration-count: infinite;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 h1 {
@@ -54,10 +55,10 @@ body {
 
 @keyframes example {
   from {
-    background-color: black;
+    content: attr("h1");
   }
   to {
-    background-color: darkslategray;
+    content: attr("p");
   }
 }
 
