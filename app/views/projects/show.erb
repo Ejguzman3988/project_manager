@@ -1,21 +1,21 @@
 <div>
-    <img class="materialboxed right" style="margin-right:-30px; margin-left:30px; margin-top:-40px" width="400px" height="300px" src="<%=@project.img_link%>">
+    <img class="materialboxed right" width="400px" height="300px" src="<%=@project.img_link%>">
     <h1><%= @project.name %></h1>
     <h4>Owned by, <%= @user.name.capitalize %></h4>
-    <% if current_user.notifications.find_by(project_id: @project.id, join_request: "accept") || @project.user_id == current_user.id%>
+    <% if current_user.notifications.find_by(project_id: @project.id, join_request: true) || @project.user_id == current_user.id%>
         <strong>
             <h5 class="green-text text-color grey lighten-4">
                 You are part of this project. <a href="/projects/<%=@project.id%>/tasks"class="green lighten-2 waves-effect waves-light btn-small right">View Tasks</a> 
-                <a href="/projects/<%=@project.id%>/tasks/new" class="bluegreen lighten-2 waves-effect waves-light btn-small right" style="margin-right:5px">New Task</a>
+                <a href="/projects/<%=@project.id%>/tasks/new" class="bluegreen lighten-2 waves-effect waves-light btn-small right" >New Task</a>
             </h5>
         </strong>
         <br>
         <div>
             <form action="/projects/<%=@project.id%>" method="post">
-                <a href="/projects/<%=@project.id%>/edit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">build</i>Edit Project</a>
+                <a href="/projects/<%=@project.id%>/edit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left">build</i>Edit Project</a>
                 <input type="hidden" name="_method" value="delete">
                 <% if current_user == @user %>
-                    <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button>
+                    <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left">delete_forever</i> Delete Project</button>
                 <% end %>
             </form>
 
@@ -26,11 +26,11 @@
                         <% requester = User.find(note.user_id) %>
                         <h6 class="text-color yellow lighten-3" id="notification">
                             <a href="/users/<%=requester.id%>"><%= requester.username %></a> Has requested to join this project. 
-                            <div id="question" style="display:inline">
-                                <form action="/notifications/<%=note.id%>/accept" method="post" style="display:inline">
+                            <div id="question">
+                                <form action="/notifications/<%=note.id%>/accept" method="post">
                                     <button>Accept</button>
                                 </form>
-                                <form action="/notifications/<%=note.id%>/decline" method="post" style="display:inline">
+                                <form action="/notifications/<%=note.id%>/decline" method="post">
                                     <button>Decline</button>
                                 </form>
                             </div>
@@ -59,24 +59,23 @@
 
     <div>
         <h5>Users:</h5>
-        <p>
-            <% @project.users.each do |user|%>
-                <% if user.notifications.find_by(project_id: @project.id).join_request == nil && @project.user_id != user.id%> 
-                        <% next %>
-                    <% end %>
+        <ul>
+            <li><a href="/users/<%=@user.id%>"><%=@user.username%></a></li> 
+            <% @accepted_users.each do |user|%>
                 <li>
                     <a href="/users/<%=user.id%>"><%=user.username%></a> 
                     <%notification = Notification.find_by(user_id: user.id, project_id: @project.id)%>
                     <% if current_user.id == @project.user_id %>
                         <% unless @project.user_id == user.id%>
                             -
-                            <form action="/notifications/<%=notification.id%>/decline" style="display:inline" method="post">
+                            <form action="/notifications/<%=notification.id%>"  method="post">
+                                <input name="_method" type="hidden" value="delete" />
                                 <input type="submit" value="Kick">
                             </form>
                         <% end %>
                     <% end %>
                 </li>
             <% end %>
-        </p>
+        </ul>
     </div>
 </div>

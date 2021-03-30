@@ -1,23 +1,44 @@
-User.create(name: "Robo", username: "test", password: "testtest")
+count = 0
+total = 100
 
-User.create(name: "Robo2", username: "test2", password: "testtest")
+# 10.times do 
+#     system('clear')
+#     count +=1
+#     puts("#{count/(total.to_f)*100}%")
+#     User.create(
+#         name: Faker::Name.name, 
+#         username: Faker::Internet.username, 
+#         password: "testtest"
+#     )
+# end
+# puts "Created Random users"
 
-User.create(name: "test", username: "user", password: "testtest")
+# puts "Creating Projects"
 
-(1..20).to_a.each do |num|
-    Project.create(name: "Project. #{num}")
+# total.times do
+#     system('clear')
+#     count +=1
+#     puts("#{count/(total.to_f)*100}%")
+    
+#     Project.create(
+#         name: Faker::App.name,
+#         description: Faker::Quote.yoda, 
+#         img_link: Faker::Avatar.image, 
+#         user_id: User.ids.sample
+#     )
+# end
+
+# puts "created projects"
+
+total.times do
+    system('clear')
+    count += 1
+    puts("#{count/(total.to_f)*100}%")
+
+    Notification.create( user_id: User.ids.sample, project_id: Project.ids.sample, join_request: [nil, true, false].sample)
+
 end
+puts "Added random users to random projects and gave random notifications."
 
-Project.all.each do |project|
-    project.update(user_id: [1, 2].sample)
-    User.find(project.user_id).projects << project
-end
 
-(1..20).to_a.each do |num|
-    Task.create(name: "Task. #{num}", user_id: [1,2].sample, project_id: Project.ids.sample)
 
-end
-
-Project.all.each do |project|
-    project.update(img_link: "https://cdn01.alison-static.net/public/html/site/img/email/pm-hub-header-img.png")
-end

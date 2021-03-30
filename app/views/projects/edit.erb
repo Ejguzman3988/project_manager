@@ -1,9 +1,9 @@
 <h1>Edit Project</h1>
-<form action="/projects/<%=@project.id%>" method="post" style="text-align:right">
+<form action="/projects/<%=@project.id%>" method="post" >
     <input type="hidden" name="_method" value="delete">
 
     <% if @user == current_user %>
-        <button type="submit" class="red lighten-2 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">delete_forever</i> Delete Project</button> 
+        <button type="submit" class="red lighten-2 waves-effect waves-light btn-small"> <i class="material-icons left" >delete_forever</i> Delete Project</button> 
     <% end %>
 </form>
 
@@ -13,25 +13,25 @@
         <div class="row">
             <div class="input-field col s12">
                 <textarea name="user[project][name]" id="project_name" class="materialize-textarea" data-length="20"><%=@project.name%></textarea>
-                <label  class="active" for="project_name" style="font-size:22px">Project Name</label>
+                <label  class="active" for="project_name">Project Name</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
                 <textarea name="user[project][description]" id="project_description" class="materialize-textarea" data-length="5000"> <%=@project.description%> </textarea>
-                <label class="active" for="project_description" style="font-size:22px">Project Description</label>
+                <label class="active" for="project_description" >Project Description</label>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s12">
                 <textarea id="project_image_link" class="materialize-textarea" name="user[project][img_link]"> <%=@project.img_link if @project.img_link != DEFAULT_IMG%></textarea>
-                <label class="active" for="project_image_link" style="font-size:22px">Image Url</label>
+                <label class="active" for="project_image_link" >Image Url</label>
             </div>
         </div>
         <br>
-        <button type="submit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">sd_card</i> Save Changes</button> 
+        <button type="submit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" >sd_card</i> Save Changes</button> 
     </form>
 </div>
 

@@ -19,19 +19,15 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+
   # Helper functions that are created to be used in controller
   helpers do
     def current_user # Gets current logged in user -> user obj
-      User.find_by_id(session[:user_id])
+      @current_user ||= User.find_by_id(session[:user_id])
     end
 
     def logged_in? # Checks if user is logged in -> truthy whether logged in
       !!current_user
-    end
-
-    # TODO: Redundant?
-    def find_user # Finds logged in user -> Sets @user variable to a User obj
-      @user = User.find_by_id(session[:user_id])
     end
 
     # TODO: change to find_project_by_id

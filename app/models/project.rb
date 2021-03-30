@@ -9,5 +9,13 @@ class Project < ActiveRecord::Base
 
     validates :description, 
     length: { maximum: 5000}
+    
+    def self.search(query)
+        Project.where("LOWER(projects.name) LIKE ?", ['%',query.downcase,'%'].join)
+    end
+
+    def accepted_users
+        User.joins(:notifications).where("notifications.project_id = ? and notifications.join_request = true", self.id)
+    end
 end
 
