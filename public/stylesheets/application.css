@@ -29,3 +29,9 @@ li form input {
   display: inline-flex;
   margin-top: -40px;
 }
+
+body {
+  background-image: url("../images/hexa.jpg");
+  background-color: tan;
+  background-size: cover;
+}
