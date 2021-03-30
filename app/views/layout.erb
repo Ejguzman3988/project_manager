@@ -6,8 +6,7 @@
   <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!-- Custom css -->
     <link type="text/css" rel="stylesheet" href="stylesheets/application.css">
     <!-- Let browser know website is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>    
@@ -19,87 +18,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
   </head>
-  
-  <!-- Image -->
-    <%# <div>
-      <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/fa/e15e80504811e6bcaf7158d37ab7ca/LightBulb.jpg?auto=format%2Ccompress&dpr=1" width="100" height="50" alt="">
-    </div> %>
-  <!-- End Image -->
 
-  <body class="grey lighten-2">
-  <!-- Navigation -->
-  <nav class="blue-grey darken-3 fixed-pos">
-    <div class="nav-wrapper container">
-      <% if logged_in? %>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul>
-          <li class="left">
-            <a href="/users/<%=current_user.id%>"><i class="material-icons left">home</i>P/M</a>
-          </li>
-          
-          <li class="middle">
-            <a href="/projects" class="sidenav-trigger"><i class="material-icons left" >image_search</i>Browse</a>
-          </li>
-          <li class="right">
-            <a href="/logout"><i class="material-icons right">exit_to_app</i>Log Out</a>
-          </li>
-          <li class="right">
-            <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
-          </li>
-          <li class="right">
-            <a href="/users/<%=current_user.id%>/tasks" class="sidenav-trigger"><i class="material-icons left">today </i>Tasks</a>
-          </li>
-          <li>
-           <nav> 
-              <div class="nav-wrapper blue-grey darken-3">
-                <form action="/projects/search" method='GET' class="inline">
-                  <div class="input-field">
-                    <input id="search" type="search" name="query" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                  </div>
-                </form>
-              </div>
-            </nav>
-          </li>
-        </ul>
-      <% else %>  
-        <a href="/"><i class="material-icons left">home</i>P/M</a>
-        <ul class="right">
-          <li>
-            <a href="/signup"><i class="material-icons right" >library_add</i>Sign Up</a>
-          </li>
-          <li> 
-            <a href="/login"><i class="material-icons right "  >login</i>Log In</a>
-          </li>
-        </ul>
-      <% end %>
-    </div>
-  </nav>
-  <!-- End Navigation -->
-  <ul class="sidenav" id="mobile-demo">
-    <li>
-      <a href="/projects" class="sidenav-trigger"><i class="material-icons left" >image_search</i>Browse</a>
-    </li>
-    
-    <li>
-      <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
-    </li>
-    
-    <li>
-      <a href="/notifications" class="sidenav-trigger"><i class="material-icons left" >notifications</i><span class="new badge"><%=current_user.not_our_notes.length%></span></a>
-    </li>
-  </ul>
+  <body>
 
-  <div class="container">
-      <!-- Errors -->
+  <div>
+     <!-- START ERRORS -->
       <% if flash[:errors] %>
-        <blockquote class="red lighten-3 white-text">
+        <blockquote>
           <b>
             <% flash[:errors].each do |error| %>
             <div>
@@ -113,7 +39,7 @@
 
       <!-- Notices -->
       <% if flash[:notices] %>
-        <blockquote class="green lighten-3 white-text">
+        <blockquote>
           <b>
             <% flash[:notices].each do |notice| %>
             <div>
@@ -126,70 +52,14 @@
       <!-- End Notices -->  
   </div>
     <!--Main Content -->
-    <div class="content container white lighten-4 z-depth-3 " >
-      <%= yield %>
-    </div>
-  </div> 
+  <div class="content">
+    <%= yield %>
+  </div>
     <!-- End Main Content -->
-    
-    <!-- Footer -->
-    <footer class="page-footer blue-grey darken-3" >
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Project Manager</h5>
-            <p class="grey-text text-lighten-4">Website made by Eriberto Guzman.</p>
-          </div>
-          <div class=" right">
-            <h5 class="white-text">Links</h5>
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="https://github.com/Ejguzman3988">Github</a></li>
-              <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/eriberto-guzman-1505361a1/">LinkedIn</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-        © 2020 Copyright Text
-      </div>
-    </footer>    
-    <!-- End Footer -->
-
+  
 
     <!--Scripts-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    
-     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script>
-      // Material Box
-      $(document).ready(function(){
-        $('.materialboxed').materialbox();
-      });
-      
-      // Parallax
-      $(document).ready(function(){
-        $('.parallax').parallax();
-      });
-
-      // CHaracter Counter
-      $(document).ready(function() {
-        $('input#task_name, textarea#project_name, textarea#project_description').characterCounter();
-      });
-       $(document).ready(function(){
-        $('.sidenav').sidenav();
-      });
-            
-    </script>        
-    
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <!--[if lt IE 7]>
-      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-    <![endif]-->
-    <!-- End of Scripts-->
+ 
+    <!-- Scripts -->
   </body>
 </html>
