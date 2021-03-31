@@ -3,27 +3,3 @@
         You have <%= @notifications.length %> notifications!
     </h3>
 </div>
-
-<div>
-    <ul>
-        <% unless @notifications.empty? %>
-            <% @notifications.each do |note| %>
-                <li>
-                    <a href="/users/<%=note.user_id%>">
-                        <%= User.find(note.user_id).username %></a> has requested to join <a href="/projects/<%=note.project_id%>"><%= find_project(note.project_id).name %>
-                    </a>
-                    <div id="question">
-                        
-                        <form action="/notifications/<%=note.id%>/accept" method="post">
-                            <button>Accept</button>
-                        </form>
-
-                        <form action="/notifications/<%=note.id%>/decline" method="post">
-                            <button>Decline</button>
-                        </form>
-                    </div>
-                </li>
-            <% end %>
-        <% end %>
-    </ul>
-</div>
