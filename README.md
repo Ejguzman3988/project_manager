@@ -1,10 +1,10 @@
 # Project Manager
 
-Project Manager is an app where a user can sign up and create projects. These projects will have titles, images, to-do lists, and a checklist for research. A user will have name, username, password, and many projects. A project will have Name, description, image, to-do list, and a research checklist. Also the project will belong to a user. This app is a quick an easy way to organize projects with other people and help keep a database of the projects structure and research. It is way too hard to get ideas off the ground, this app helps bridge that while providing an easy to use interface. 
+Project Manager is an app where a user can sign up and create projects. These projects will have titles, images, to-do lists, and a checklist for research. A user will have name, username, password, and many projects. A project will have Name, description, image, to-do list, and a research checklist. Also the project will belong to a user. This app is a quick an easy way to organize projects with other people and help keep a database of the projects structure and research. It is way too hard to get ideas off the ground, this app helps bridge that while providing an easy to use interface.
 
 ## Installation
 
-Fork and clone this repo. 
+Fork and clone this repo.
 
 And then execute:
 
@@ -16,19 +16,17 @@ To test run shotgun in the console
 
 After running shotgun use the homepage at [localhost:9393](http://localhost:9393) to navigate through the webpage.
 
-Sample video below: 
+Sample video below:
 
 TODO: POST SAMPLE VIDEO
-
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Ejguzman3988/project_manager. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Ejguzman3988/project_manager/blob/master/CODE_OF_CONDUCT.md).
 
-
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://github.com/Ejguzman3988/project_manager/blob/master/LICENSE.txt).
 
 ## Code of Conduct
 
