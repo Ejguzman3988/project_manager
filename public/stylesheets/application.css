@@ -113,6 +113,17 @@ body {
   border-radius: 10px;
 }
 
+form {
+  display: inline-block;
+  align-self: center;
+  align-items: center;
+  background-color: rgba(228, 202, 205, 1);
+  border-style: double;
+  border-color: black;
+  max-width: 60vw;
+  margin-top: 25 px;
+}
+
 @keyframes description {
   0% {
     left: 20%;
