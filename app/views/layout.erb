@@ -21,6 +21,28 @@
   </head>
 
   <body>
+  <div class="content">
+  <!-- START NAV -->
+  <nav>
+    <% if logged_in? %>
+      <div>
+        <a href="/">HOME</a>
+        <a href="/projects">Browse</a>
+        <a href="/logout">Log Out</a>
+      </div>
+    <% else %>
+        <h1 class="e-title">Project Manager</h1>
+      <div class="e-title">
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Log In</a>
+      </div>
+    <% end %>
+    
+  </nav>
+  <!-- END NAV -->
+
+
+
 
   <div>
      <!-- START ERRORS -->
@@ -52,7 +74,6 @@
       <!-- End Notices -->  
   </div>
     <!--Main Content -->
-  <div class="content">
     <%= yield %>
   </div>
     <!-- End Main Content -->

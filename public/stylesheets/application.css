@@ -8,25 +8,40 @@
 .content {
   border: 10px, solid, black;
   position: relative;
-  max-width: 1200px;
+  max-width: 75%;
   padding: 40px;
   margin: auto;
   color: black;
   stroke-opacity: 10%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  animation-name: example;
-  animation-duration: 4s;
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
-  background-color: rgba(255, 255, 255, 0.7);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: black;
 }
 
-h1 {
+.e-title {
   font-size: 50px;
+  display: inline-block;
 }
 
-nav a {
-  position: relative;
+nav div {
+  background: blue;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-style: solid;
+  border-radius: 25px;
+  float: right;
+  margin-top: 25px;
+}
+
+nav div a {
+  text-align: right;
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+  border-color: blue;
+  background: orange;
+  border-style: outset;
+  border-radius: 25px;
+  padding: 10px;
 }
 
 li form {
@@ -40,26 +55,95 @@ li form input {
   color: white;
 }
 
-.nav-sub {
-  display: inline-flex;
-  margin-top: -40px;
-}
-
 body {
-  background-image: url("../images/background.jpg");
+  background-image: url("../images/max-whitehead-o2kvosAH1Bg-unsplash.jpg");
   background-color: tan;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
+.container {
+  height: 90vh;
+  width: 90vw;
+}
 
-@keyframes example {
-  from {
-    content: attr("h1");
+.ani-desc {
+  animation-name: description;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  max-width: 33%;
+  max-height: 33%;
+  background-color: rgba(228, 202, 205, 0.9);
+  z-index: 3;
+  padding: 10px;
+  left: 10%;
+  border: solid;
+  border-radius: 10px;
+}
+
+.ani-vid {
+  animation-name: video;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  left: 10%;
+  max-width: 33%;
+  max-height: 33%;
+  background-color: rgba(228, 202, 205, 0.9);
+  z-index: 2;
+  padding: 10px;
+  border: solid;
+  border-radius: 10px;
+}
+
+.ani-cont {
+  overflow: hidden;
+  animation-name: contribution;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  max-width: 33%;
+  max-height: 33%;
+  background-color: rgba(228, 202, 205, 1);
+  z-index: 1;
+  padding: 10px;
+  left: 10%;
+  border: solid;
+  border-radius: 10px;
+}
+
+@keyframes description {
+  0% {
+    left: 20%;
+    top: 20%;
   }
-  to {
-    content: attr("p");
+  100% {
+    left: 50%;
+    top: 20%;
   }
 }
 
+@keyframes contribution {
+  0% {
+    left: 20%;
+    top: 20%;
+  }
+  33% {
+    left: 50%;
+    top: 20%;
+  }
+  66% {
+    left: 50%;
+    top: 60%;
+    max-width: 33%;
+  }
+
+  100% {
+    left: 10%;
+    top: 60%;
+    max-width: 80%;
+    width: 100%;
+  }
+}
 /* The element to apply the animation to */
