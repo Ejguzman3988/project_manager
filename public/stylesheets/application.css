@@ -1,47 +1,20 @@
-.fixed-pos {
-  position: fixed;
-  z-index: 999;
-  box-shadow: 10px;
-  margin-top: -40px;
+body {
+  background-image: url("../images/max-whitehead-o2kvosAH1Bg-unsplash.jpg");
+  background-color: tan;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.content {
-  border: 10px, solid, black;
-  position: relative;
-  max-width: 75%;
-  padding: 40px;
-  margin: auto;
-  color: black;
-  stroke-opacity: 10%;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  color: black;
-}
-
-.e-title {
-  font-size: 50px;
+form {
   display: inline-block;
-}
-
-nav div {
-  background: blue;
-  padding: 10px;
-  padding-bottom: 20px;
-  border-style: solid;
-  border-radius: 25px;
-  float: right;
-  margin-top: 25px;
-}
-
-nav div a {
-  text-align: right;
-  color: black;
-  text-decoration: none;
-  font-size: 30px;
-  border-color: blue;
-  background: orange;
-  border-style: outset;
-  border-radius: 25px;
-  padding: 10px;
+  align-self: center;
+  align-items: center;
+  background-color: rgba(228, 202, 205, 1);
+  border-style: double;
+  border-color: black;
+  max-width: 60vw;
+  margin-top: 25 px;
 }
 
 li form {
@@ -55,16 +28,25 @@ li form input {
   color: white;
 }
 
-body {
-  background-image: url("../images/max-whitehead-o2kvosAH1Bg-unsplash.jpg");
-  background-color: tan;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+nav div {
+  background: blue;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-style: solid;
+  border-radius: 25px;
+  float: right;
+  margin-top: 25px;
 }
-.container {
-  height: 90vh;
-  width: 90vw;
+nav div a {
+  text-align: right;
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+  border-color: blue;
+  background: orange;
+  border-style: outset;
+  border-radius: 25px;
+  padding: 10px;
 }
 
 .ani-desc {
@@ -76,6 +58,22 @@ body {
   max-height: 33%;
   background-color: rgba(228, 202, 205, 0.9);
   z-index: 3;
+  padding: 10px;
+  left: 10%;
+  border: solid;
+  border-radius: 10px;
+}
+
+.ani-cont {
+  overflow: hidden;
+  animation-name: contribution;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  max-width: 33%;
+  max-height: 33%;
+  background-color: rgba(228, 202, 205, 1);
+  z-index: 1;
   padding: 10px;
   left: 10%;
   border: solid;
@@ -97,31 +95,32 @@ body {
   border-radius: 10px;
 }
 
-.ani-cont {
-  overflow: hidden;
-  animation-name: contribution;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
-  position: absolute;
-  max-width: 33%;
-  max-height: 33%;
-  background-color: rgba(228, 202, 205, 1);
-  z-index: 1;
-  padding: 10px;
-  left: 10%;
-  border: solid;
-  border-radius: 10px;
+.container {
+  height: 90vh;
+  width: 90vw;
 }
 
-form {
+.content {
+  border: 10px, solid, black;
+  position: relative;
+  max-width: 75%;
+  padding: 40px;
+  margin: auto;
+  color: black;
+  stroke-opacity: 10%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: black;
+}
+
+.e-title {
+  font-size: 50px;
   display: inline-block;
-  align-self: center;
-  align-items: center;
-  background-color: rgba(228, 202, 205, 1);
-  border-style: double;
-  border-color: black;
-  max-width: 60vw;
-  margin-top: 25 px;
+}
+.fixed-pos {
+  position: fixed;
+  z-index: 999;
+  box-shadow: 10px;
+  margin-top: -40px;
 }
 
 @keyframes description {
