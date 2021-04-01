@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     get '/users/:id' do 
         if logged_in?
             @user = User.find(params[:id])
-            @all_projects ||= @user.created_projects + @user.accepted_projects
+            @all_projects ||= @user.created_projects
             @page = params[:page].to_i
             if @page > 0
                 @projects = Project.pagination(@all_projects, @page)
