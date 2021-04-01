@@ -47,8 +47,8 @@ class UsersController < ApplicationController
 
     # Form to edit currently logged on user
     get '/users/:id/edit' do 
-        profile_user = User.find(params[:id])
-        if logged_in? && current_user == profile_user
+        @user = User.find(params[:id])
+        if logged_in? && current_user == @user
             erb :'/users/edit'
         else
             flash[:errors] = ["Can't edit another users profile"]

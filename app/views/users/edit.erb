@@ -7,23 +7,23 @@
     <input type="hidden" name="_method" value="patch">
     <br>
     <div class="input-field col s12">
-        <input type="text" name="user[name]" id="user_name" value="<%=@user.name%>" class="validate">
         <label class="active" for="user_name" style="font-size:22px">Name</label>
+        <input type="text" name="user[name]" id="user_name" value="<%=@user.name%>" class="validate">
     </div>
     <br>
     <div class="input-field col s12">
-        <input class="validate" type="text" name="user[username]" id="user_username" value="<%=@user.username%>">
         <label class="active" for="user_username" style="font-size:22px">User Name</label>
+        <input class="validate" type="text" name="user[username]" id="user_username" value="<%=@user.username%>">
     </div>
     <br>
     <div class="input-field col s12">
-        <input class="validate" type="password" name="user[old_password]" id="user_old_password">
         <label for="user_old_password" style="font-size:22px">Confirm Password</label>
+        <input class="validate" type="password" name="user[old_password]" id="user_old_password">
     </div>
     <br>
     <div class="input-field col s12">
-        <input class="validate" type="password" name="user[new_password]" id="user_password">
         <label for="user_password" style="font-size:22px">New Password</label>
+        <input class="validate" type="password" name="user[new_password]" id="user_password">
     </div>
     <br>
     <button type="submit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left" style="margin-right:2px; margin-left:-8px">save</i> Save Changes</button> 

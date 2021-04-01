@@ -3,8 +3,8 @@
     <form class="col s12" action="/projects/<%=@project.id%>/tasks"  method="post">
         <div class="row">
             <div class="input-field col s12">
-                <input type="text" name="project[task][name]" id="task_name" data-length="20">
                 <label for="task_name">Task Name:</label>
+                <input type="text" name="project[task][name]" id="task_name" data-length="20">
             </div>
         </div>
 
@@ -26,15 +26,15 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <textarea name="project[task][description]" id="project_description" class="materialize-textarea" data-length="5000"></textarea>
                 <label for="project_description" >Task Description</label>
+                <textarea name="project[task][description]" id="project_description" class="materialize-textarea" data-length="5000"></textarea>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s12">
-                <input type="datetime-local" name="project[task][deadline]" id="task_deadline">
                 <label class="active" for="task_deadline">Deadline: </label>
+                <input type="datetime-local" name="project[task][deadline]" id="task_deadline">
             </div>
         </div>
 
