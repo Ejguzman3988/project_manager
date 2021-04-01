@@ -94,7 +94,7 @@ nav div a {
   border-radius: 10px;
 }
 
-.card {
+.container {
   color: black;
   background-color: rgba(228, 202, 205, 0.9);
   display: flex;
@@ -102,7 +102,7 @@ nav div a {
   border: 1px black solid;
 }
 
-.container {
+.card {
   text-align: center;
   padding: 2px 16px;
   border: 4px black solid;
