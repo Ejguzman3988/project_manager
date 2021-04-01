@@ -12,9 +12,14 @@ class ProjectsController < ApplicationController
     # Displays all the projects in the database
     get '/projects' do 
         if logged_in?
-            @projects = Project.all
-            erb :'projects/index'
+            @all_projects ||= Project.all
+            if params[:page]
+                @projects = Project.pagination(@all_projects, params[:page].to_i)
+            else
+                @projects = Project.pagination(@all_projects)
             
+            end
+            erb :'projects/index'
         else
             flash[:errors] = ["Please log in to view projects"]
             redirect '/login'
@@ -127,4 +132,5 @@ class ProjectsController < ApplicationController
         flash[:notices] = ["You Have successfully deleted project."]
         redirect "/users/#{current_user.id}"
     end
+
 end

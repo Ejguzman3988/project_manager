@@ -17,5 +17,9 @@ class Project < ActiveRecord::Base
     def accepted_users
         User.joins(:notifications).where("notifications.project_id = ? and notifications.join_request = true", self.id)
     end
+
+    def self.pagination(query, page=1)
+        query.limit(page*20)
+    end
 end
 
