@@ -13,9 +13,11 @@ class ProjectsController < ApplicationController
     get '/projects' do 
         if logged_in?
             @all_projects ||= Project.all
-            if params[:page]
-                @projects = Project.pagination(@all_projects, params[:page].to_i)
+            @page = params[:page].to_i
+            if @page > 0
+                @projects = Project.pagination(@all_projects, @page.to_i)
             else
+                @page = 1
                 @projects = Project.pagination(@all_projects)
             
             end
@@ -132,5 +134,8 @@ class ProjectsController < ApplicationController
         flash[:notices] = ["You Have successfully deleted project."]
         redirect "/users/#{current_user.id}"
     end
+
+    private
+
 
 end

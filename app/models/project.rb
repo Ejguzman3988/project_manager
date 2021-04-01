@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
     end
 
     def self.pagination(query, page=1)
-        query.limit(page*20)
+        query.limit(page*6)
     end
 end
 
