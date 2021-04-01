@@ -6,19 +6,20 @@
 <% end %>
 
 
-<a href="/projects/new" class="right grey darken-4 waves-effect waves-light btn-small"><i class="material-icons left" >create_new_folder</i>Create New Project</a>
-
+<a href="/projects/new" class="btn"><i class="material-icons left" >create_new_folder</i>Create New Project</a>
 
 <div>
-    <div class="conatiner">
+    <div class="container">
         <% @projects.each do |project| %>
-            <div class="card">
+            <a href="/projects/<%=project.id%>" class="card no-dec">
                 <img src="<%=project.img_link%>" class="e-img">
-                <h1><%= project.name %>  </h1>
+                <h1><%= project.name %></h1>
                 <p><%= project.description %></p>
-            </div>
+            </a>
           
         
         <% end %>
     </ul>  
 </div>
+
+<a href="/projects?page=<%=@page+1%>" class="btn show-more">Show More</a>

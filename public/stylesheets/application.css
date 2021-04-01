@@ -48,6 +48,24 @@ nav div a {
   padding: 10px;
 }
 
+.no-dec {
+  text-decoration: none;
+}
+
+.btn {
+  text-align: right;
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+  border-color: blue;
+  background: orange;
+  border-style: outset;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 5px;
+  display: inline-block;
+}
+
 .ani-desc {
   animation-name: description;
   animation-duration: 1s;
@@ -110,11 +128,11 @@ nav div a {
   width: 30%;
   min-height: 25%;
   max-height: 40%;
+  color: black;
 }
 
 .content {
   border: 10px, solid, black;
-  position: relative;
   max-width: 75%;
   padding: 40px;
   margin: auto;
@@ -136,6 +154,15 @@ nav div a {
 
 .e-img {
   border: 2px black dotted;
+}
+
+.show-more {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: 30px;
+  background: rgba(228, 202, 205, 0.9);
+  display: block;
 }
 
 @keyframes description {
