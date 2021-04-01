@@ -1,8 +1,24 @@
 <h1><%= @user.name %> profile:</h1>
 <div>
-    <a href="/projects/new"><i class="material-icons left" >create_new_folder</i>Create New Project</a>
+    <a href="/projects/new" class="btn"><i class="material-icons left" >create_new_folder</i>Create New Project</a>
     
     <% if current_user == @user %>
-        <a href="/users/<%=@user.id%>/edit" class="left grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons" >construction</i> Edit Profile</a>
+        <a href="/users/<%=@user.id%>/edit" class="btn"> <i class="material-icons" >construction</i> Edit Profile</a>
     <% end %>
 </div>
+
+<div>
+    <div class="container">
+        <% @projects.each do |project| %>
+            <a href="/projects/<%=project.id%>" class="card no-dec">
+                <img src="<%=project.img_link%>" class="e-img">
+                <h1><%= project.name %></h1>
+                <p><%= project.description %></p>
+            </a>
+          
+        
+        <% end %>
+    </ul>  
+</div>
+
+<a href="/projects?page=<%=@page+1%>" class="btn show-more">Show More</a>

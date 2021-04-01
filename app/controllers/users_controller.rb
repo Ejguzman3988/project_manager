@@ -4,8 +4,17 @@ class UsersController < ApplicationController
     # TODO: Change to show generic user profile?/ create a new index page
     # Shows all of users projects
     get '/users' do
+        @user = current_user
         if logged_in?
-            @projects = current_user.created_projects
+            @all_projects ||= current_user.created_projects
+            @page = params[:page].to_i
+            if @page > 0
+                @projects = Project.pagination(@all_projects, @page.to_i)
+            else
+                @page = 1
+                @projects = Project.pagination(@all_projects)
+            
+            end
             erb :'/users/show' 
         else
             redirect '/login'
