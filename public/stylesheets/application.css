@@ -139,6 +139,7 @@ nav div a {
   color: black;
   stroke-opacity: 10%;
   font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rgba(228, 202, 205, 0.9);
 }
 
 .e-title {

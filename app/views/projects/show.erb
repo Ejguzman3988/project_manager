@@ -1,21 +1,21 @@
-<div>
-    <img class="materialboxed right" width="400px" height="300px" src="<%=@project.img_link%>">
+<div class="content">
+    <img width="400px" height="300px" src="<%=@project.img_link%>">
     <h1><%= @project.name %></h1>
     <h4>Owned by, <%= @user.name.capitalize %></h4>
     <% if current_user.notifications.find_by(project_id: @project.id, join_request: true) || @project.user_id == current_user.id%>
         <strong>
-            <h5 class="green-text text-color grey lighten-4">
-                You are part of this project. <a href="/projects/<%=@project.id%>/tasks"class="green lighten-2 waves-effect waves-light btn-small right">View Tasks</a> 
-                <a href="/projects/<%=@project.id%>/tasks/new" class="bluegreen lighten-2 waves-effect waves-light btn-small right" >New Task</a>
+            <h5>
+                You are part of this project. <a href="/projects/<%=@project.id%>/tasks">View Tasks</a> 
+                <a href="/projects/<%=@project.id%>/tasks/new" >New Task</a>
             </h5>
         </strong>
         <br>
         <div>
             <form action="/projects/<%=@project.id%>" method="post">
-                <a href="/projects/<%=@project.id%>/edit" class="grey darken-4 waves-effect waves-light btn-small"> <i class="material-icons left">build</i>Edit Project</a>
+                <a href="/projects/<%=@project.id%>/edit"> <i class="material-icons left">build</i>Edit Project</a>
                 <input type="hidden" name="_method" value="delete">
                 <% if current_user == @user %>
-                    <button type="submit" class="red lighten-2 waves-effect waves-light btn-small right"> <i class="material-icons left">delete_forever</i> Delete Project</button>
+                    <button type="submit" class="btn"> <i class="material-icons left">delete_forever</i> Delete Project</button>
                 <% end %>
             </form>
 
@@ -24,14 +24,14 @@
                 <% if current_user == @user %>
                     <% @notifications.each do |note| %>
                         <% requester = User.find(note.user_id) %>
-                        <h6 class="text-color yellow lighten-3" id="notification">
+                        <h6 id="notification">
                             <a href="/users/<%=requester.id%>"><%= requester.username %></a> Has requested to join this project. 
                             <div id="question">
                                 <form action="/notifications/<%=note.id%>/accept" method="post">
-                                    <button>Accept</button>
+                                    <button class="btn">Accept</button>
                                 </form>
                                 <form action="/notifications/<%=note.id%>/decline" method="post">
-                                    <button>Decline</button>
+                                    <button class="btn">Decline</button>
                                 </form>
                             </div>
                             <p id="response"></p>
@@ -44,10 +44,10 @@
     <% else %>
         <% unless Notification.find_by(project_id: @project.id, user_id: current_user.id) %>
             <form action="/projects/<%=@project.id%>/join" method="post">
-                <input type="submit" value="Join Request">
+                <input class='btn' type="submit" value="Join Request">
             </form>
         <% else %>
-            <button disabled="disabled">Join Requested</button>
+            <button disabled="disabled" class='btn'>Join Requested</button>
         <% end %>
     <% end %>
     <br>
@@ -70,7 +70,7 @@
                             -
                             <form action="/notifications/<%=notification.id%>"  method="post">
                                 <input name="_method" type="hidden" value="delete" />
-                                <input type="submit" value="Kick">
+                                <input class='btn' type="submit" value="Kick">
                             </form>
                         <% end %>
                     <% end %>
