@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
             @all_projects ||= Project.all
             @page = params[:page].to_i
             if @page > 0
-                @projects = Project.pagination(@all_projects, @page.to_i)
+                @projects = Project.pagination(@all_projects, @page)
             else
                 @page = 1
                 @projects = Project.pagination(@all_projects)

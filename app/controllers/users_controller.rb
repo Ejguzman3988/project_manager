@@ -9,7 +9,7 @@ class UsersController < ApplicationController
             @all_projects ||= current_user.created_projects
             @page = params[:page].to_i
             if @page > 0
-                @projects = Project.pagination(@all_projects, @page.to_i)
+                @projects = Project.pagination(@all_projects, @page)
             else
                 @page = 1
                 @projects = Project.pagination(@all_projects)
@@ -30,11 +30,18 @@ class UsersController < ApplicationController
     get '/users/:id' do 
         if logged_in?
             @user = User.find(params[:id])
-        
-            @projects = @user.created_projects + @user.accepted_projects
-            erb :'/users/show'
+            @all_projects ||= @user.created_projects + @user.accepted_projects
+            @page = params[:page].to_i
+            if @page > 0
+                @projects = Project.pagination(@all_projects, @page)
+            else
+                @page = 1
+                @projects = Project.pagination(@all_projects)
+            
+            end
+            erb :'/users/show' 
         else
-            redirect "/login"
+            redirect '/login'
         end
     end
 
