@@ -94,9 +94,22 @@ nav div a {
   border-radius: 10px;
 }
 
+.card {
+  color: black;
+  background-color: rgba(228, 202, 205, 0.9);
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px black solid;
+}
+
 .container {
-  height: 90vh;
-  width: 90vw;
+  text-align: center;
+  padding: 2px 16px;
+  border: 4px black solid;
+  margin: 2px;
+  width: 30%;
+  min-height: 25%;
+  max-height: 40%;
 }
 
 .content {
@@ -108,7 +121,6 @@ nav div a {
   color: black;
   stroke-opacity: 10%;
   font-family: Georgia, "Times New Roman", Times, serif;
-  color: black;
 }
 
 .e-title {
@@ -120,6 +132,10 @@ nav div a {
   z-index: 999;
   box-shadow: 10px;
   margin-top: -40px;
+}
+
+.e-img {
+  border: 2px black dotted;
 }
 
 @keyframes description {

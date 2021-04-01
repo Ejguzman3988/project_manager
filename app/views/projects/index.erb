@@ -7,3 +7,18 @@
 
 
 <a href="/projects/new" class="right grey darken-4 waves-effect waves-light btn-small"><i class="material-icons left" >create_new_folder</i>Create New Project</a>
+
+
+<div>
+    <div class="card">
+        <% @projects.each do |project| %>
+            <div class="container">
+                <img src="<%=project.img_link%>" class="e-img">
+                <h1><%= project.name %>  </h1>
+                <p><%= project.description %></p>
+            </div>
+          
+        
+        <% end %>
+    </ul>  
+</div>

@@ -13,6 +13,7 @@ gem 'dotenv'
 gem 'rack-flash3'
 gem 'pg'
 gem 'pry'
+gem "faker", "~> 2.17"
 
 group :test do
   gem 'rspec'
@@ -22,4 +23,3 @@ group :test do
 end
 
 
-gem "faker", "~> 2.17"
